@@ -48,12 +48,6 @@ def lastfinishers():
 #	split1=lastfew[0][2]
 #	finish1=lastfew[0][3]
 #
-	# Find driver/car
-#	cur.execute('''SELECT Driver,MakeModel,Class FROM Entries WHERE Car=%s;''' % ("'"+carno1+"'"))
-#	entry=cur.fetchone()
-#	class1=entry[2]  #Breaks if no car in entry list
-#	driver1=entry[0]
-#	car1=entry[1]
 
 #	return render_template('lastfinishers.html',carno1=carno1,driver1=driver1,car1=car1,sixtyfour1=sixtyfour1,split1=split1,finish1=finish1,numberoffinishers=numberoffinishers)
 
@@ -62,6 +56,33 @@ def classresults():
 	cur.execute('''SELECT * FROM ClassResults;''')
 	currentresults=cur.fetchall()
 	return jsonify(currentresults)
+
+@app.route('/ClassResults/<thisclass>')
+def thisclassresults(thisclass):
+	cur.execute('''SELECT Car,Least(COALESCE(Timed1,Timed2),COALESCE(Timed2,Timed1),COALESCE(Timed3,Timed1),COALESCE(Timed4,Timed1)) AS Best from ClassResults where Class = 1 order by Best;''')
+	thisclassresults=cur.fetchall()
+	position = 1
+	driver = "tbc"  # TBC - establish driver and car
+	car = "tbc"  # TBC - establish driver and car
+	stilltorun = []
+	tabularresults=[]
+	for thisresult in thisclassresults:
+		# Find driver/car
+		cur.execute('''SELECT Driver,MakeModel,Class FROM Entries WHERE Car=%s;''' % ("'"+str(thisresult[0])+"'"))
+		entry=cur.fetchone()
+		driver=entry[0]  #Breaks if no car in entry list
+		car=entry[1]
+		
+		# Add row to table
+		if thisresult[1]:
+			thislist = [position,driver,car,str(thisresult[1])]
+			tabularresults.append(list(thislist))
+			position = position + 1
+		else:
+			thislist = ["",driver,car,str(thisresult[1])]
+			stilltorun.append(list(thislist))
+	tabularresults += stilltorun
+	return render_template('classresults.html',rows=tabularresults,thisclass=thisclass)
 
 @app.route('/EntryList')
 def entrylist():

@@ -1,0 +1,20 @@
+<html>
+	<head>
+		<title>Class Results</title>
+	</head>
+	<body>
+		<h1>Class {{ thisclass }}</h1>
+		<table>
+			<tr><td>Position</td><td>Driver</td><td>Car</td><td>Best Time</td></tr>
+			{% for row in rows %}
+			<tr>
+				<td>{{ row[0] }}</td>
+				<td>{{ row[1] }}</td>
+				<td>{{ row[2] }}</td>
+				<td>{{ row[3] }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+		<p><a href="/">Root</a></p>
+	</body>
+</html>
