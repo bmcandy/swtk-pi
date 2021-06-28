@@ -6,6 +6,7 @@
 # 3. /ClassResults - The current results by class
 # 4. /EntryList - The entry list including car number, name, vehicle and class
 
+
 import MySQLdb #apt-get install python-mysqldb
 from flask import Flask, render_template, jsonify # pip install flask
 
@@ -19,27 +20,29 @@ try:
 		db="SpeedOnScreen"
 	)
 except MySQLdb.Error as e:
-	print e
-cur = conn.cursor()
+	print(e)
 
 app = Flask(__name__)
-
 @app.route('/')
 def index():
 	return render_template('index.html')
 
 @app.route('/RecentFinishers/<seconds>')
 def recentfinishers(seconds):
-	cur.execute('''SELECT Car,SixtyFour,Split,Finish FROM RawResults WHERE TimeOfDay > NOW() - INTERVAL %s SECOND ORDER BY TimeOfDay Desc;''' % (str(seconds)))
+	cur = conn.cursor()
+	cur.execute('''SELECT Car,SixtyFour,Split,Finish FROM RawResults WHERE (TimeOfDay > (NOW() - INTERVAL %s SECOND)) ORDER BY TimeOfDay Desc;''' % (str(seconds)))
 	recentfew=cur.fetchall()
+	conn.commit()
 	return jsonify(recentfew)
 		
 @app.route('/LastFinishers')
 def lastfinishers():
 	# Return last x cars
-	numberoffinishers=3
-	cur.execute('''SELECT Car,SixtyFour,Split,Finish FROM RawResults order by TimeOfDay Desc limit %d;''' % (numberoffinishers))
+	numberoffinishers=2
+	cur = conn.cursor()
+	cur.execute('''SELECT Car,SixtyFour,Split,Finish FROM RawResults order by TimeOfDay Desc limit %s;''' % (str(numberoffinishers)))
 	lastfew=cur.fetchall()
+	conn.commit()
 	return jsonify(lastfew)
 	
 	#Set variables to display first item returned (messy and doesn't scale)
@@ -53,14 +56,18 @@ def lastfinishers():
 
 @app.route('/ClassResults')
 def classresults():
+	cur = conn.cursor()
 	cur.execute('''SELECT * FROM ClassResults;''')
 	currentresults=cur.fetchall()
+	conn.commit()
 	return jsonify(currentresults)
 
 @app.route('/ClassResults/<thisclass>')
 def thisclassresults(thisclass):
+	cur = conn.cursor()
 	cur.execute('''SELECT Car,Least(COALESCE(Timed1,Timed2),COALESCE(Timed2,Timed1),COALESCE(Timed3,Timed1),COALESCE(Timed4,Timed1)) AS Best from ClassResults where Class = 1 order by Best;''')
 	thisclassresults=cur.fetchall()
+	conn.commit()
 	position = 1
 	driver = "tbc"  # TBC - establish driver and car
 	car = "tbc"  # TBC - establish driver and car
@@ -72,7 +79,7 @@ def thisclassresults(thisclass):
 		entry=cur.fetchone()
 		driver=entry[0]  #Breaks if no car in entry list
 		car=entry[1]
-		
+	
 		# Add row to table
 		if thisresult[1]:
 			thislist = [position,driver,car,str(thisresult[1])]
@@ -81,14 +88,17 @@ def thisclassresults(thisclass):
 		else:
 			thislist = ["",driver,car,str(thisresult[1])]
 			stilltorun.append(list(thislist))
+	conn.commit()
 	tabularresults += stilltorun
 	return render_template('classresults.html',rows=tabularresults,thisclass=thisclass)
 
 @app.route('/EntryList')
 def entrylist():
+	cur = conn.cursor()
 	cur.execute('''SELECT * FROM Entries;''')
 	entries=cur.fetchall()
+	conn.commit()
 	return jsonify(entries)
 
 if __name__ == '__main__':
-	app.run(debug=True, host='0.0.0.0')
+	app.run(debug=False, host='0.0.0.0')
