@@ -1,0 +1,135 @@
+Class,No.,Name,Club,Ch,Car,cc
+T1,110A,Jane Hibbert,Woolbridge,TQ,BMW 328i Sport Coupe,2793
+T1,80,Martin Ellis,HSA,HSA,Ford Escort Mk 2,1760
+T1,81,Peter Stiles,Burnham-on-Sea,TQ,Suzuki Swift GTi,1370
+T1,82,Julian Rinaldi,Woolbridge,TQ,Fiat Panda 100HP,1368
+T1,83,Stephen Wareham,Woolbridge,TQ,Morris Mini,1380
+T1,84,Steven Hepworth,Woolbridge,,Ford Cortina Mk1 GT,1558
+T1,85,Ian Peacock,Torbay,,Citroen C2 VTS,1600
+T1,86,Roger Hodgson,Woolbridge,,MG TF,1796
+T1,87,Andrew Webber,HSA,HSA,Lotus Elan+2,1760
+T1,88,Jon Langmead,Woolbridge,TQ,Lotus Elise 135R,1798
+T1,89,James Hudson,Torbay,TQ,VW Golf,1781
+T1,90,Mike Ford,Woolbridge,TQ,Lotus Elise S1,1796
+T1,91,Jonathan Wright,Burnham-on-Sea,TQ,Volkswagen Golf GTi,1799
+T1,92,Matt Vann,Burnham-on-Sea,TQ,Audi TT,1781t
+T1,94,Peter Heath,Woolbridge,,Ford Fiesta ST,1598t
+T1,95,Anthony Wright,Burnham-on-Sea,TQ,Audi A3,1781t
+T1,96,George Koopman,Woolbridge,TQ,Toyota Yaris,1618t
+T1,97,Debbie Blake,Woolbridge,TQ,Mini Cooper S JCW,1598s
+T1,98,Richard Mullis,Woolbridge,,Audi TT,1781t
+T1,99,John Wells,Woolbridge,TQ,Mazda MX5,1600t
+T1,100,Harry Harris,Torbay,TQ,Mazda MX5,1798t
+T1,101,John White,Woolbridge,TQ,Audi S3,1781t
+T1,102,Rodney Eyles,Taunton,TQ,Alfa Romeo 4c,1750t
+T1,103,Peter Ramsden,Woolbridge,TQ,Mazda MX5 NC1,1999
+T1,104,Samuel Gibbons,Torbay,,Audi TT,1800t
+T1,105,Rob Thomson,HSA,HSA,Renault Clio 172 Cup,1998
+T1,106,Peter Taylor,HSA,HSA,Mazda MX5,1999
+T1,107,Keith Seume,Woolbridge,,Porsche 914,2056
+T1,109,Richard Barnes,Taunton,TQ,BMW 435i M Sport,2996t
+T1,110,Terence Hedley,Woolbridge,TQ,BMW 328I Sport Coupe,2793
+T1,111,Simon Neve,Woolbridge,TQ,Mitsubishi Lancer Evo 6 RS,2300t
+T1,112,Gary Dawkins,Torbay,,Lotus Exige,3500s
+T1,124,David Bennett,HSA,HSA,Porsche Boxster 986,3200
+T2,113,James Gibson,Woolbridge,,Westfield SE,1400
+T2,114,Martin Bragg,Burnham-on-Sea,TQ,GTM Coupe,1330
+T2,115,Tim Monk,Woolbridge,HSA,Fisher Fury,1300
+T2,116,Martyn Turner,HSA,HSA,MNR Vortx,1000
+T2,117,Ian Harrison,Plymouth,,TVR Vixen,1700
+T2,118,Mike Lee,Woolbridge,TQ,Caterham 7 R500,1796
+T2,119,Ian Hodgson,Torbay,TQ,Westfield SeiW,1796
+T2,120,Roger Coote,Torbay,TQ,Ginetta G4,1796
+T2,121,Steven Hill,Torbay,"DEWS,TQ",Caterham 7 Superlite,1796
+T2,122,Ian Ingleheart,Plymouth,TQ,Westfield SE Cosworth,1700
+T2,123,Jim Faulkner,Woolbridge,,Westfield Widebody,2000
+T3,134A,Graham Blake,Woolbridge,TQ,Westfield SEIW,1998
+T3,125,Deran Stephenson,Torbay,,Nissan Pulsar GTiR,1998t
+T3,126,Julian Harber,HSA,HSA,BL Mini Clubman,1340
+T3,127,Shaun Tuckey,Torbay,TQ,Ford Ka,1600
+T3,128,Nathan Tuckey,Torbay,TQ,Ford Ka,1600
+T3,129,Neil Tuckey,Torbay,,Ford Fiesta,1660
+T3,130,Jonathan Baker,Torbay,TQ,Ford Fiesta Zetec S,1600
+T3,131,James Rushworth,Woolbridge,HSA,BMW E30,2397
+T3,133,Martin Stubbington,Woolbridge,TQ,VW Golf Mk1 1.8 Gti,1870
+T3,134,Geoff Blake,Woolbridge,TQ,Westfield SEIW,1998
+T4,143A,Jan Yeo,Torbay,TQ,Legend Ford Coupe,1300
+T4,135,Andrew Graham,Midland Rover OC,,Land Rover 90 TD5,2495t
+T4,136,John Simpson,Plymouth,TQ,Ford Escort MK2,1998
+T4,137,Mike Dixon,Exeter,TQ,Ford Mk1 Escort,1998
+T4,138,Tim Porter,Burnham-on-Sea,TQ,Darrian T90,1998
+T4,141,Norman Dunford,Woolbridge,TQ,Ford Escort Mk2 RS2000,1998
+T4,142,Tim Pitfield,Woolbridge,TQ,DJ Firecat,1400
+T4,143,David Yeo,Exeter,TQ,Legend '34 Ford Coupe,1300
+T4,144,Rodney Thorne,Woolbridge,TQ,Pilbeam MP43,5000
+T5,150A,Mike Williams,Woolbridge,TQ,MWR Storm,998
+T5,151A,Tony Bonfield,HSA,HSA,Jedi Mk4,998
+T5,148,Campbell Adams,BARC (SW),,OMS 2000M,"1,098"
+T5,149,Shelly Deacon,Taunton,TQ,Hi-tech DP,600
+T5,150,Tom Williams,Woolbridge,TQ,MWR Storm,998
+T5,151,Ben Bonfield,HSA,"HSA,TQ",Jedi Mk4,998
+T5,152,Andrew Mathis,Woolbridge,TQ,OMS PR,1277
+T5,153,Carole Nicholls,HSA,HSA,Nike Mk 4,1600
+T5,154,Steve Snell,Plymouth,TQ,Ralt RT35,1598
+T5,155,Adrian Lewis,Woolbridge,TQ,Empire Evo,999
+T5,156,Andrew Forsyth,Woolbridge,TQ,OMS CF04,1400
+T5,157,Ed Hollier,Woolbridge,TQ,Pilbeam MP62,1585
+R,160,Stuart Samson,Downton,DEWS,Austin Mini City,1275t
+R,161,Nigel Samson,Downton,DEWS,Austin Mini Clubman,1380
+R,162,Steve Harris,Downton,DEWS,Austin Mini,1380
+R,163,John Hill,Downton,DEWS,BMW Mini Cooper S,1598s
+R,164,Stuart Lugger,Downton,DEWS,Mini Cooper,1380
+R,165,Simon Hannam,Downton,DEWS,MG Midget,1380
+R,166,John Kirby,Downton,DEWS,Mini Clubman,1380
+R,167,Matt Webb,Downton,DEWS,Austin Mini,1330
+R,169,Derek Kessell,Downton,DEWS,Maguire Mini Cooper S,1360
+R,170,Graham Gonzalez,Downton,DEWS,Austin Mini,1380
+R,171,Zak Cobb,Downton,DEWS,Mini Cooper S,1598s
+A(i),20,Lee Kessell,Woolbridge,,Austin Mini,1310
+A(i),21,Tony Adams,MAC,Cup,Lotus Elise,1800
+A(i),22,James Kerr,BARC,Cup,Peugeot 205,1997
+A(ii),25,Peter Herbert,HSA,Cup,Porsche 911,3600
+B,27,Timothy Higgins,Hagley & DLCC,Cup,Westfield SEI,1998
+C(i),30,Andrew Russell,HSA,Cup,Ginetta G15,1120
+C(iii),35A,Andy Fraser,Woolbridge,Cup,Aston Martin Vantage GT4,4300
+C(iii),31,Jonathan Williamson,Burnham-on-Sea,Cup/TQ,Porsche 911 Carrera,3200
+C(iii),32,Stephen Moore,BARC,Cup,Mitsubishi Evo 6,2300t
+C(iii),33,Damien Bradley,BARC (Y),BHC/Cup,Subaru Legacy GL,2350t
+C(iii),34,Peter Turnbull,Woolbridge,Cup,Porsche 911 (997 GT3 Cup),3600
+C(iii),35,Tim Painter,Woolbridge,Cup,Aston Martin Vantage GT4,4300
+C(iii),37,Tom Reeves,Woolbridge,,Peugeot 205,2250
+G,41,Allan Mcdonald,Hagley & DLCC,BHC/Cup,Morris Mini EVO,2400t
+H,43,Chris Howard-Harris,BOC,BHC/Cup,OMS Hornet,599
+I,46A,Mark Lawrence,BARC,BHC/Cup,OMS 3000M,1070
+I,47A,Andy Greenen,BOC,BHC/Cup,Empire Evo 2,1070
+I,45,Keith Weeks,HSA,BHC,Image FF5,998
+I,46,Harry Pick,Hagley & DLCC,BHC/Cup,OMS 3000M,1070
+I,47,Adam Greenen,BARC (SW),BHC/Cup,Empire Evo 2,1070
+J(ii),54A,Caroline Ryder,MAC,Cup,Empire Wraith,1585
+J(ii),57A,Olivia Cooper,Woolbridge,BHC/Cup,Force TA,1600
+J(ii),710,Allan Warburton,MAC,BHC/Cup,Gould GR59,1600
+J(ii),51,Andy Short,Torbay,TQ,OMS CF07,1589
+J(ii),52,Jason Tunnicliffe,Woolbridge,BHC/Cup,Empire Evo 2,1558
+J(ii),53,Neal Coles,MAC,BHC/Cup,OMS 28,1585
+J(ii),54,Matthew Ryder,MAC,BHC/Cup,Empire Wraith,1585
+J(ii),55,Eynon Price,Hagley & DLCC,BHC/Cup,Force TA,1585
+J(ii),56,Darren Gumbley,MAC,BHC/Cup,Force TA,1600
+J(ii),57,Liam Cooper,Woolbridge,BHC/Cup,Force TA,1600
+J(ii),10,David Warburton,Hagley & DLCC,BHC/Cup,Gould GR59,1600
+K(i),59A,Tricia Davis,Hagley & DLCC,Cup,Reynard TKD YV8,2000
+K(i),59,Terry Davis,Hagley & DLCC,Cup,Reynard TKD YV8,2000
+K(i),60,Lee Griffiths,BARC,BHC/Cup,OMS 28,1660
+K(i),61,Johnathen Varley,BARC,BHC/Cup,GWR Predator,2000
+K(ii),63,Simon Moyse,BARC (SW),BHC/Cup,Gould GR59,1300s
+K(ii),64,Paul Haimes,Plymouth,BHC,Gould GR59,1300t
+K(ii),65,Kelvin Broad,MAC,BHC,Force TA,1300s
+K(ii),4,Richard Spedding,BARC (Y),BHC/Cup,GWR Raptor 2,1340s
+L,708,Graham Wynn,Hagley & DLCC,BHC/Cup,Gould GRW59 Judd,4000
+L,69,Terry Graves,Woolbridge,BHC/Cup,Gould GR37,3500
+L,8,Scott Moran,MAC,BHC/Cup,Gould GRW59 Judd,4000
+L,7,Sean Gould,MAC,BHC/Cup,Gould GR59BJ,4000
+L,5,Trevor Willis,BARC,BHC,OMS 28,3200
+L,2,Alex Summers,MAC,BHC/Cup,DJ Firestorm,2650
+L,1,Wallace Menzies,Lothian,BHC/Cup,Gould GR59-M,3300
+M,71A,Amanda George,Woolbridge,Cup,Chevron B19,1975
+M,71,Richard George,BARC (SW),Cup,Chevron B19,1975
