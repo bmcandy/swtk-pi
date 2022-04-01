@@ -7,6 +7,7 @@
 # 4. /EntryList - The entry list including car number, name, vehicle and class
 
 
+import datetime
 import MySQLdb #apt-get install python-mysqldb
 from flask import Flask, render_template, jsonify # pip install flask
 
@@ -54,16 +55,16 @@ def lastfinishers():
 
 #	return render_template('lastfinishers.html',carno1=carno1,driver1=driver1,car1=car1,sixtyfour1=sixtyfour1,split1=split1,finish1=finish1,numberoffinishers=numberoffinishers)
 
-@app.route('/ClassResults')
-def classresults():
+@app.route('/AllClassResults')
+def allclassresults():
 	cur = conn.cursor()
 	cur.execute('''SELECT * FROM ClassResults;''')
 	currentresults=cur.fetchall()
 	conn.commit()
 	return jsonify(currentresults)
 
-@app.route('/ClassResults/<thisclass>')
-def thisclassresults(thisclass):
+@app.route('/AllClassResults/<thisclass>')
+def thisallclassresults(thisclass):
 	cur = conn.cursor()
 	cur.execute('''SELECT Car,Least(COALESCE(Timed1,Timed2),COALESCE(Timed2,Timed1),COALESCE(Timed3,Timed1),COALESCE(Timed4,Timed1)) AS Best from ClassResults where Class = 1 order by Best;''')
 	thisclassresults=cur.fetchall()
@@ -99,6 +100,61 @@ def entrylist():
 	entries=cur.fetchall()
 	conn.commit()
 	return jsonify(entries)
+
+@app.route('/ClassResults/<myclass>')
+def classresults(myclass):
+	rightnow = datetime.datetime.now()
+	thistime='00:00:00'
+	timestampstring = str(rightnow.year) + '-0' + str(rightnow.month) + '-' + str(rightnow.day) + ' ' + thistime
+	cur = conn.cursor()
+	print timestampstring
+	cur.execute('''select Entries.Driver, class, RawResults.Car, min(Finish) AS Best From RawResults INNER JOIN Entries on Entries.Car = RawResults.Car WHERE timeofday > '%s' and class = '%s' GROUP BY RawResults.Car Order by Best limit 12;''') ,(timestampstring,myclass[0]+myclass[1])
+	print ('''select Entries.Driver, class, RawResults.Car, min(Finish) AS Best From RawResults INNER JOIN Entries on Entries.Car = RawResults.Car WHERE timeofday > '%s' and class = '%s' GROUP BY RawResults.Car Order by Best limit 12;''') ,(timestampstring,myclass[0]+myclass[1])
+	results = cur.fetchall()
+	conn.commit()
+	return jsonify(results)
+
+@app.route('/RunOff')
+def RunOff():
+	cur = conn.cursor()
+	cur.execute('''select Entries.Driver, class, RawResults.Car, min(Finish) AS Best From RawResults INNER JOIN Entries on Entries.Car = RawResults.Car WHERE timeofday > '2021-08-01 16:07:00' and finish >0 GROUP BY RawResults.Car Order by Best limit 12;''') 
+	results = cur.fetchall()
+	conn.commit()
+	return jsonify(results)
+
+@app.route('/T1Results')
+def T1results():
+	cur = conn.cursor()
+	cur.execute('''select Entries.Driver, class, RawResults.Car, min(Finish) AS Best From RawResults INNER JOIN Entries on Entries.Car = RawResults.Car WHERE timeofday > '2021 07 31 10:00:00' and class = 'T1' GROUP BY RawResults.Car Order by Best limit 12;''') 
+	results = cur.fetchall()
+	conn.commit()
+	return jsonify(results)
+
+@app.route('/T2Results')
+def T2results():
+	cur = conn.cursor()
+	cur.execute('''select Entries.Driver, class, RawResults.Car, min(Finish) AS Best From RawResults INNER JOIN Entries on Entries.Car = RawResults.Car WHERE timeofday > '2021 07 31 10:00:00' and class = 'T2' GROUP BY RawResults.Car Order by Best limit 12;''') 
+	results = cur.fetchall()
+	conn.commit()
+	return jsonify(results)
+
+@app.route('/T3Results')
+def T3results():
+	cur = conn.cursor()
+	cur.execute('''select Entries.Driver, class, RawResults.Car, min(Finish) AS Best From RawResults INNER JOIN Entries on Entries.Car = RawResults.Car WHERE timeofday > '2021 07 31 10:00:00' and class = 'T3' GROUP BY RawResults.Car Order by Best limit 12;''') 
+	results = cur.fetchall()
+	conn.commit()
+	return jsonify(results)
+	
+@app.route('/T4Results')
+def T4results():
+	cur = conn.cursor()
+	cur.execute('''select Entries.Driver, class, RawResults.Car, min(Finish) AS Best From RawResults INNER JOIN Entries on Entries.Car = RawResults.Car WHERE timeofday > '2021 07 31 10:00:00' and class = 'T4' GROUP BY RawResults.Car Order by Best limit 12;''') 
+	results = cur.fetchall()
+	conn.commit()
+	return jsonify(results)
+
+
 
 if __name__ == '__main__':
 	app.run(debug=False, host='0.0.0.0')

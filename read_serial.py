@@ -69,23 +69,29 @@ def RecordFinish(result):
 	finishtime=result.split("Time: ")[1].split("\r")[0]
 	
 	# Read secxond line of text
-	x=ser.readline()
+	#x=ser.readline()
+	x=result.split("\r")[1]
+	print "#"+x+"#"
 	# Find s=64 foot and split times from second line of text
-	sixtyfour=x.split("  ")[1].split(" ")[0]
+	sixtyfour=x.split("   ")[1].split(" ")[0]
 	splittime=x.split("  ")[2].split("\r")[0]
+	if len(sixtyfour) == 0:
+		sixtyfour="0.00"
 	# Deal with failed runs
 	if finishtime == "NTR": # change this for what is expected to be a RERUN
 		print "No time recorded: re-run expected"
 		finishtime="999.999"
 		runstate="RERUN"
-	elif finishtime == "Red Flag": # Change this for what is expected to be a FAIL
-		print "No time recorded: failed run"
-		finishtime="999.999"
+	elif finishtime == "FAIL": # Change this for what is expected to be a FAIL
+		print "No time recorded: Failed run"
 		runstate="FAIL"
-		UpdateResults(carnumber,finishtime,runstate) # update the results table with a FAIL
+		#UpdateResults(carnumber,finishtime,runstate) # update the results table with a FAIL
+	elif finishtime == "Red Flag": # Change this for what is expected to be a RERUN
+		print "No time recorded: re-run Expected"
+		runstate="RERUN"
 	else:
 		runstate="Normal"
-		UpdateResults(carnumber,finishtime,runstate) # Update the results table with time
+		#UpdateResults(carnumber,finishtime,runstate) # Update the results table with time
 	print "#"+carnumber+"#"+sixtyfour+"#"+splittime+"#"+finishtime+"#"
 	
 	# Record raw results in the SQL table
