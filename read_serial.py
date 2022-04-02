@@ -3,7 +3,7 @@
 import time
 import serial
 import MySQLdb #apt-get install python-mysqldb
-global colcolour
+colcolour = "00c2cb"
 
 # BUGS
 # Doesn't do Timed4
@@ -33,6 +33,7 @@ cur = conn.cursor()
 
 # Update results table
 def UpdateResults(carno="",ftime="",rs=""):
+	global colcolour
 	# Establish the class for the car
 	cur.execute('''SELECT * FROM Entries WHERE Car=%s;''' % ("'"+carno+"'"))
 	entry=cur.fetchone()
@@ -47,14 +48,19 @@ def UpdateResults(carno="",ftime="",rs=""):
 		RunColumns=["","Practice1","Practice2","Timed1","Timed2","Timed3","Timed4"]
 		fastest = 999.999
 		for x in range(1,7):
-			if x > 2:
-				if fastest > results[x]:
-					fastest = results[x]
+			if x > 1:
+				if results[x] is None:
+					skip = 1
+				else:
+					if fastest > float(results[x]):
+						fastest = float(results[x])
 			if results[x] is None:
 				print " Recording run "+str(x)+" ... Car: "+str(results[0])+"    Time: "+str(ftime)
 				# Update the first empty column in the row for that car
 				cur.execute('''UPDATE ClassResults SET %s = %s WHERE Car = '%s';''' % (RunColumns[x],ftime,carno))
-				if ftime < fastest:
+				print "#"+str(ftime)+"#"+str(fastest)+"#"
+				if float(ftime) < float(fastest):
+					print "\n\n*** Fastest ***\n\n"
 					colcolour = "7ed957"
 				else:
 					colcolour = "00c2cb"
@@ -103,12 +109,10 @@ def RecordFinish(result):
 	else:
 		runstate="Normal"
 		UpdateResults(carnumber,finishtime,runstate) # Update the results table with time
-	print "#"+carnumber+"#"+sixtyfour+"#"+splittime+"#"+finishtime+"#"
+	print "#"+carnumber+"#"+sixtyfour+"#"+splittime+"#"+finishtime+"#"+colcolour+"#"
 	
 	# Record raw results in the SQL table
-	if colcolour is None:
-		colcolour = "00c2cb"
-	cur.execute('''INSERT INTO RawResults(Car,SixtyFour,Split,Finish,RunState,Colour) VALUES(%s,%s,%s,%s,%s,%s,%s);''',(carnumber,sixtyfour,splittime,finishtime,runstate,colcolour))
+	cur.execute('''INSERT INTO RawResults(Car,SixtyFour,Split,Finish,RunState,Colour) VALUES(%s,%s,%s,%s,%s,%s);''',(carnumber,sixtyfour,splittime,finishtime,runstate,colcolour))
 	conn.commit()
 
 # Just keep looping...

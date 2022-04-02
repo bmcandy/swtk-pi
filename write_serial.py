@@ -44,9 +44,9 @@ while 1:
 	if random.randint(1,100) > 1:
 		sixfour = str(random.randint(2,4)) + "." + str(random.randint(10,99))
 		splittime = str(random.randint(22,28)) + "." + str(random.randint(10,99))
-		print "Car: %s  Time: %s\r\n  %s  %s\r\n\nxxx\n"%(car,finish,sixfour,splittime)
-		ser.write("Car: %s  Time: %s\r\n  %s  %s\r\n\nxxx\n"%(car,finish,sixfour,splittime))
-		f.write("Car: %s  Time: %s\r\n  %s  %s\r\n\nxxx\n"%(car,finish,sixfour,splittime))
+		print "Car: %s  Time: %s\r\n   %s  %s\r\n\nxxx\n"%(car,finish,sixfour,splittime)
+		ser.write("Car: %s  Time: %s\r   %s  %s\rxxx"%(car,finish,sixfour,splittime))
+		f.write("Car: %s  Time: %s\r\n   %s  %s\r\n\nxxx\n"%(car,finish,sixfour,splittime))
 	else:
 		print "no split time"
 	interval = random.randint(2,5)
