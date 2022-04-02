@@ -96,16 +96,18 @@ def RecordFinish(result):
 	elif finishtime == "FAIL": # Change this for what is expected to be a FAIL
 		print "No time recorded: Failed run"
 		runstate="FAIL"
-		#UpdateResults(carnumber,finishtime,runstate) # update the results table with a FAIL
+		UpdateResults(carnumber,finishtime,runstate) # update the results table with a FAIL
 	elif finishtime == "Red Flag": # Change this for what is expected to be a RERUN
 		print "No time recorded: re-run Expected"
 		runstate="RERUN"
 	else:
 		runstate="Normal"
-		#UpdateResults(carnumber,finishtime,runstate) # Update the results table with time
+		UpdateResults(carnumber,finishtime,runstate) # Update the results table with time
 	print "#"+carnumber+"#"+sixtyfour+"#"+splittime+"#"+finishtime+"#"
 	
 	# Record raw results in the SQL table
+	if colcolour is None:
+		colcolour = "00c2cb"
 	cur.execute('''INSERT INTO RawResults(Car,SixtyFour,Split,Finish,RunState,Colour) VALUES(%s,%s,%s,%s,%s,%s,%s);''',(carnumber,sixtyfour,splittime,finishtime,runstate,colcolour))
 	conn.commit()
 
