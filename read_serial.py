@@ -3,6 +3,7 @@
 import time
 import serial
 import MySQLdb #apt-get install python-mysqldb
+global colcolour
 
 # BUGS
 # Doesn't do Timed4
@@ -44,12 +45,22 @@ def UpdateResults(carno="",ftime="",rs=""):
 		if rs=="FAIL":	# set a FAIL to 999 seconds for easy querying
 			ftime="999.999"
 		RunColumns=["","Practice1","Practice2","Timed1","Timed2","Timed3","Timed4"]
+		fastest = 999.999
 		for x in range(1,7):
+			if x > 2:
+				if fastest > results[x]:
+					fastest = results[x]
 			if results[x] is None:
 				print " Recording run "+str(x)+" ... Car: "+str(results[0])+"    Time: "+str(ftime)
 				# Update the first empty column in the row for that car
 				cur.execute('''UPDATE ClassResults SET %s = %s WHERE Car = '%s';''' % (RunColumns[x],ftime,carno))
+				if ftime < fastest:
+					colcolour = "7ed957"
+				else:
+					colcolour = "00c2cb"
 				break
+
+
 	else:
 		print "First run ... Car: "+carno+"    Time: "+ftime
 		cur.execute('''INSERT INTO ClassResults(Car,Practice1,Class) VALUES(%s,%s,%s);''',(carno,ftime,vclass))
@@ -95,7 +106,7 @@ def RecordFinish(result):
 	print "#"+carnumber+"#"+sixtyfour+"#"+splittime+"#"+finishtime+"#"
 	
 	# Record raw results in the SQL table
-	cur.execute('''INSERT INTO RawResults(Car,SixtyFour,Split,Finish,RunState) VALUES(%s,%s,%s,%s,%s);''',(carnumber,sixtyfour,splittime,finishtime,runstate))
+	cur.execute('''INSERT INTO RawResults(Car,SixtyFour,Split,Finish,RunState,Colour) VALUES(%s,%s,%s,%s,%s,%s);''',(carnumber,sixtyfour,splittime,finishtime,runstate,colcolour))
 	conn.commit()
 
 # Just keep looping...
