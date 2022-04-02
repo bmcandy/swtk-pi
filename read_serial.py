@@ -106,7 +106,7 @@ def RecordFinish(result):
 	print "#"+carnumber+"#"+sixtyfour+"#"+splittime+"#"+finishtime+"#"
 	
 	# Record raw results in the SQL table
-	cur.execute('''INSERT INTO RawResults(Car,SixtyFour,Split,Finish,RunState,Colour) VALUES(%s,%s,%s,%s,%s,%s);''',(carnumber,sixtyfour,splittime,finishtime,runstate,colcolour))
+	cur.execute('''INSERT INTO RawResults(Car,SixtyFour,Split,Finish,RunState,Colour) VALUES(%s,%s,%s,%s,%s,%s,%s);''',(carnumber,sixtyfour,splittime,finishtime,runstate,colcolour))
 	conn.commit()
 
 # Just keep looping...
