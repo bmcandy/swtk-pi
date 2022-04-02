@@ -66,7 +66,7 @@ def allclassresults():
 @app.route('/AllClassResults/<thisclass>')
 def thisallclassresults(thisclass):
 	cur = conn.cursor()
-	cur.execute('''SELECT Car,Least(COALESCE(Timed1,Timed2),COALESCE(Timed2,Timed1),COALESCE(Timed3,Timed1),COALESCE(Timed4,Timed1)) AS Best from ClassResults where Class = 1 order by Best;''')
+	cur.execute('''SELECT * FROM (SELECT Car,Least(COALESCE(Timed1,Timed2),COALESCE(Timed2,Timed1),COALESCE(Timed3,Timed1),COALESCE(Timed4,Timed1)) AS Best from ClassResults where Class = %s order by Best) As Dave WHERE Best > 0;''' % ("'"+str(thisclass)+"'"))
 	thisclassresults=cur.fetchall()
 	conn.commit()
 	position = 1
