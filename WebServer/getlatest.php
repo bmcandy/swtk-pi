@@ -9,7 +9,7 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 include "database.php";
 //SQL Query
-$sql = 'SELECT RawResults.car,entries.Driver,entries.MakeModel,entries.Class,RawResults.SixtyFour,rawresults.Split,rawresults.Finish,rawresults.Colour FROM RawResults LEFT JOIN entries ON RawResults.car=entries.car order by TimeOfDay Desc limit '.$showlatest;
+$sql = 'SELECT RawResults.Car,Entries.Driver,Entries.MakeModel,Entries.Class,RawResults.SixtyFour,RawResults.Split,RawResults.Finish,RawResults.Colour FROM RawResults LEFT JOIN Entries ON RawResults.Car=Entries.Car order by TimeOfDay Desc limit '.$showlatest;
 
 $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($conn));
 $query = array();

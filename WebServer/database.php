@@ -9,10 +9,10 @@
 $showlatest = 3; 
 $showranked = 10;
 
-$servername = "localhost:3306";
-$username = "root";
-$password = "";
-$dbname = "speedonscreen";
+$servername = "127.0.0.1:3306";
+$username = "Results";
+$password = "Results";
+$dbname = "SpeedOnScreen";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname) or die("Error " . mysqli_error($conn));

@@ -13,7 +13,7 @@ if (!isset($_GET['class'])) {
 $class = $_GET['class'];
 include "database.php";
 //SQL Query
-$sql = 'SELECT entries.Driver, sub.Best, entries.Class FROM ( SELECT Car,Least(COALESCE(Timed1,Timed2),COALESCE(Timed2,Timed1),COALESCE(Timed3,Timed1),COALESCE(Timed4,Timed1)) AS Best from ClassResults where Class = "'.$class.'" order by Best ) sub LEFT JOIN entries ON sub.car=entries.car order by Best limit '.$showranked;
+$sql = 'SELECT Entries.Driver, sub.Best, Entries.Class FROM ( SELECT Car,Least(COALESCE(Timed1,Timed2),COALESCE(Timed2,Timed1),COALESCE(Timed3,Timed1),COALESCE(Timed4,Timed1)) AS Best from ClassResults where Class = "'.$class.'" order by Best ) sub LEFT JOIN Entries ON sub.Car=Entries.Car order by Best limit '.$showranked;
 
 $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($conn));
 $query = array();
