@@ -40,6 +40,8 @@ def UpdateResults(carno="",ftime="",rs=""):
 	vclass=entry[5]
 	cur.execute('''SELECT Car,Best FROM (SELECT Car,Least(COALESCE(Timed1,Timed2),COALESCE(Timed2,Timed1),COALESCE(Timed3,Timed1),COALESCE(Timed4,Timed1)) AS Best from ClassResults where Class = %s order by Best) As Dave WHERE Best > 0 ORDER BY Best;''' % ("'"+str(vclass)+"'"))
 	classfastest = cur.fetchone()
+	if classfastest[1] is None:
+		classfastest = ["Nobody", "999.999"]
 	
 	# Get results so far
 	cur.execute('''SELECT * FROM ClassResults WHERE Car=%s;''' % ("'"+carno+"'"))
