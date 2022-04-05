@@ -61,13 +61,13 @@ def UpdateResults(carno="",ftime="",rs=""):
 				# Update the first empty column in the row for that car
 				cur.execute('''UPDATE ClassResults SET %s = %s WHERE Car = '%s';''' % (RunColumns[x],ftime,carno))
 				print "#"+str(ftime)+"#"+str(fastest)+"#"
-				if float(ftime) < float(fastest):
-					print "*** Improvement ***"
-					colcolour = "7ed957"
+				if float(classfastest[1]) > float(ftime):
+					print "\n\n*** Fastest ***\n\n"
+					colcolour = "5e17eb"
 				else:
-					if float(classfastest[1]) < float(fastest):
-						print "\n\n*** Fastest ***\n\n"
-						colcolour = "5e17eb"
+					if float(ftime) < float(fastest):
+						print "*** Improvement ***"
+						colcolour = "7ed957"
 					else:
 						colcolour = "00c2cb"
 				break
