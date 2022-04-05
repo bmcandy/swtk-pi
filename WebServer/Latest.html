@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--
+- (c) Franky Vanroy 2022
+- Script created for Andy Laurence
+- Fetching the data of the latest runs
+- and populating a lower third graphic    
+-->
+<html>
+    <head>
+    <html style ="width: 1920px; overflow :hidden">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Latest Cars</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+<div class = "outer">
+<div ID="hdr"></div>
+<div ID="ldb"></div>
+</div>  
+<script>
+url = "Getlatest.php"
+fetchlatest();
+setInterval(fetchlatest,1000);// Interval checking for new data
+function fetchlatest(){
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        console.log("data",data)
+        console.log("data",data.length)
+        build(data)
+    })
+    .catch(error => {
+        console.log(error);
+        fetchlatest();
+    });    
+}
+function build(content) {//build
+    if (content.length == 0) return;
+    //Header
+    document.getElementById('hdr').innerHTML = ""
+    hdr =""; 
+    hdr += '<div class="cntr"><div class="txtr">'
+    hdr += '<div class="txtc txtcc">' + "#"  + '</div>';
+    hdr += '<div class="txtc txtcd">' + "Driver" + '</div>';
+    hdr += '<div class="txtc txtcm">' + "Car"  + '</div>';
+    hdr += '<div class="txtc txtcl">' + "Class"  + '</div>';
+    hdr += '<div class="txtc txtc6">' + "64Ft&nbsp;"  + '</div>';
+    hdr += '<div class="txtc txtcs">' + "Split&nbsp;&nbsp;" + '</div>';
+    hdr += '<div class="txtc txtcf">' + "Finish&nbsp;" + '</div>';
+    hdr += '</div></div>'
+    document.getElementById('hdr').innerHTML = hdr;
+    hdr =""; 
+    //Leaderboard
+    t= content.length -1;
+    ldb = ""
+    document.getElementById('ldb').innerHTML = ""
+    for (i = 0; i <= t; i++) {
+        ldb += '<div class="cntr"style="background-color :#'+ content[i].Colour+'"><div class="txtr">'
+        ldb += '<div class="txtc txtcc">' + content[i].car  + '</div>';
+        ldb += '<div class="txtc txtcd">' + content[i].Driver  + '</div>';
+        ldb += '<div class="txtc txtcm">' + content[i].MakeModel  + '</div>';
+        ldb += '<div class="txtc txtcl">' + content[i].Class  + '</div>';
+        ldb += '<div class="txtc txtc6">' + content[i].SixtyFour  + '</div>';
+        ldb += '<div class="txtc txtcs">' + content[i].Split  + '</div>';
+        ldb += '<div class="txtc txtcf">' + content[i].Finish  + '</div>';
+        ldb += '</div></div>'
+        document.getElementById('ldb').innerHTML += ldb;
+        ldb =""; 
+    }
+
+}//build
+</script> 
+</body>
+</html>

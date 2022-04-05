@@ -1,0 +1,82 @@
+<html>
+    <head>
+    <html style ="width: 1920px; overflow :hidden">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Ranked</title>
+    <link rel="stylesheet" href="style.css">
+
+    </head>
+<body>
+<div class = "outer2">
+<div ID="hdr"></div>
+<div ID="ldb"></div>
+</div>  
+        
+<script>
+</script>
+    <script>
+//url = "http://localhost:81/hill/getranked.php" + window.location.search
+url = "getranked.php" + window.location.search
+qs= window.location.search
+console.log("xx19")
+console.log(qs)
+fetchranked();
+//setInterval(fetchranked,1000);
+function fetchranked(){
+
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+      console.log("data",data)
+      build(data);
+})
+.catch(error => {
+        console.log(error);
+        //fetchapi()
+            });    
+
+
+}
+//inhoud ="doemaarwat"
+//build(inhoud)
+function build(content) {//build
+    if (content.length == 0) return;
+    console.log("xx32")
+    console.log("data",content)
+
+    document.getElementById('hdr').innerHTML = ""
+    
+    hdr =""; 
+    hdr += '<div class="cntr2"><div class="txtr">'
+    hdr += '<div class="txtc txtch2">' + "Class: "+ content[0].Class +'</div>'
+/*
+    hdr += '<div class="txtc txtcr2">' + "#"  + '</div>';
+    hdr += '<div class="txtc txtcd2">' + "Driver" + '</div>';
+    hdr += '<div class="txtc txtcf2">' + "Finish&nbsp;" + '</div>';
+*/
+    hdr += '</div></div>'
+    document.getElementById('hdr').innerHTML = hdr;
+    hdr =""; 
+
+    t= content.length -1;
+    ldb = ""
+    document.getElementById('ldb').innerHTML = ""
+    for (i = 0; i <= t; i++) {
+        console.log("i",i); 
+        ldb += '<div class="cntr2"><div class="txtr">'
+        ldb += '<div class="txtc txtcr2">' + (i+1)  + '</div>';
+        ldb += '<div class="txtc txtcd2">' + content[i].Driver  + '</div>';
+        ldb += '<div class="txtc txtcf2">' + content[i].Best  + '</div>';
+
+        ldb += '</div></div>'
+        document.getElementById('ldb').innerHTML += ldb;
+        ldb =""; 
+    }    
+
+
+}//build
+    </script>
+</body>
+</html>
