@@ -38,7 +38,7 @@ def UpdateResults(carno="",ftime="",rs=""):
 	cur.execute('''SELECT * FROM Entries WHERE Car=%s;''' % ("'"+carno+"'"))
 	entry=cur.fetchone()
 	vclass=entry[5]
-	cur.execute('''SELECT * FROM (SELECT Car,Least(COALESCE(Timed1,Timed2),COALESCE(Timed2,Timed1),COALESCE(Timed3,Timed1),COALESCE(Timed4,Timed1)) AS Best from ClassResults where Class = %s order by Best) As Dave WHERE Best > 0 ORDER BY Best;''' % ("'"+str(vclass)+"'"))
+	cur.execute('''SELECT Car,Best FROM (SELECT Car,Least(COALESCE(Timed1,Timed2),COALESCE(Timed2,Timed1),COALESCE(Timed3,Timed1),COALESCE(Timed4,Timed1)) AS Best from ClassResults where Class = %s order by Best) As Dave WHERE Best > 0 ORDER BY Best;''' % ("'"+str(vclass)+"'"))
 	classfastest = cur.fetchone()
 	
 	# Get results so far
@@ -65,7 +65,7 @@ def UpdateResults(carno="",ftime="",rs=""):
 					print "*** Improvement ***"
 					colcolour = "7ed957"
 				else:
-					if float(classfastest.Best) < float(fastest):
+					if float(classfastest[1]) < float(fastest):
 						print "\n\n*** Fastest ***\n\n"
 						colcolour = "5e17eb"
 					else:
