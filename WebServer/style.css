@@ -5,7 +5,7 @@ body {
     overflow: hidden;
     background-color: #00800000;
     color:white;
-    font-size: 20px;
+    font-size: 28px;
     font-family:helvetica;
 }
 .outer{
@@ -31,7 +31,6 @@ body {
     overflow:hidden;
     width:100%;
     
-    
 } 
 .txtc {/*cell*/
     box-sizing: border-box;
@@ -40,7 +39,7 @@ body {
 }
 .txtcc {/*car*/
     box-sizing: border-box;
-    width : 60px;
+    width : 80px;
     text-align: center;
 }
 .txtcd {/*driver*/
@@ -75,10 +74,10 @@ body {
 .outer2{
     position:absolute;
     box-sizing: border-box;
-    width:350px;
+    width:1000px;
     Top:200px;
-    left:15px;
-    font-size:20px;
+    left:460px;
+    font-size:40px;
 }
 .cntr2 {
     position: relative;
@@ -91,16 +90,16 @@ body {
 }
 .txtcr2 {/*rank*/
     box-sizing: border-box;
-    width : 30px;
+    width : 80px;
     text-align: center;
 }
 .txtcd2 {/*driver*/
     box-sizing: border-box;
-    width : 225px;
+    width : 700px;
 }
 .txtcf2 {/*finish*/
     box-sizing: border-box;
-    width : 70px;
+    width : 200px;
     text-align: right;
 }
 .txtch2 {/*header class*/
