@@ -50,11 +50,21 @@ function build(content) {//build
     ldb = ""
     document.getElementById('ldb').innerHTML = ""
     for (i = 0; i <= t; i++) {
+        
+
         console.log("i",i); 
         ldb += '<div class="cntr2"><div class="txtr">'
         ldb += '<div class="txtc txtcr2">' + (i+1)  + '</div>';
         ldb += '<div class="txtc txtcd2">' + content[i].Driver  + '</div>';
-        ldb += '<div class="txtc txtcf2">' + content[i].Best  + '</div>';
+
+        if (content[i].Best === null) {
+            ldb += '<div class="txtc txtcf2">Not Run Yet</div>';
+    
+        } else {
+            ldb += '<div class="txtc txtcf2">' + content[i].Best  + '</div>';
+
+        }
+
         ldb += '</div></div>'
         document.getElementById('ldb').innerHTML += ldb;
         ldb =""; 
