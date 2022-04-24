@@ -62,7 +62,7 @@ def UpdateResults(carno="",ftime="",rs=""):
 			if results[x] is None:
 				print " Recording run "+str(x)+" ... Car: "+str(results[0])+"    Time: "+str(ftime)
 				# Update the first empty column in the row for that car
-				cur.execute('''UPDATE ClassResults SET %s = %s WHERE Car = '%s';''' % (RunColumns[x],ftime,carno))
+				cur.execute('''UPDATE ClassResults SET %s = %s WHERE Car = '%s';''',(RunColumns[x],ftime,carno))
 				print "#"+str(ftime)+"#"+str(fastest)+"#"
 				if float(classfastest[1]) > float(ftime):
 					print "\n\n*** Fastest ***\n\n"
