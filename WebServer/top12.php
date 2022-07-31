@@ -7,7 +7,7 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 include "database.php";
 //SQL Query
-$sql = 'SELECT Entries.Driver as Driver,RawResults.Finish as Finish FROM RawResults order by RawResults.Finish;
+$sql = 'SELECT RawResults.Car,Entries.Driver,RawResults.Finish FROM RawResults LEFT JOIN Entries ON RawResults.Car=Entries.Car order by RawResults.Finish;'
 
 $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($conn));
 $query = array();
