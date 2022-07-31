@@ -23,37 +23,37 @@
     </table>
 
     <script>
-        // const testData = [
-        //     { Driver: 'Seb Vettel', Finish: '1:09:67' },
-        //     { Driver: 'Valtteri Bottas', Finish: '1:08:66' },
-        //     { Driver: 'Mika Hakkinen', Finish: '1:04:34' },
-        //     { Driver: 'Michael Schumacher', Finish: '1:02:43' },
-        //     { Driver: 'Nigel Mansell', Finish: '1:04:23' },
-        //     { Driver: 'David Coulthard', Finish: '1:09:97' },
-        //     { Driver: 'Jackie Steward', Finish: '1:12:69' },
-        //     { Driver: 'Jensen Button', Finish: '1:03:21' },
-        //     { Driver: 'Mark Webber', Finish: null },
-        //     { Driver: 'James Hunt', Finish: '1:02:45' },
-        //     { Driver: 'Ralph Schumacher', Finish: '1:04:82' },
-        //     { Driver: 'Kimi Raikkonen', Finish: '1:00:84' }];
+        const testData = [
+            { Driver: 'Seb Vettel', Finish: '1:09:67' },
+            { Driver: 'Valtteri Bottas', Finish: '1:08:66' },
+            { Driver: 'Mika Hakkinen', Finish: '1:04:34' },
+            { Driver: 'Michael Schumacher', Finish: '1:02:43' },
+            { Driver: 'Nigel Mansell', Finish: '1:04:23' },
+            { Driver: 'David Coulthard', Finish: '1:09:97' },
+            { Driver: 'Jackie Steward', Finish: '1:12:69' },
+            { Driver: 'Jensen Button', Finish: '1:03:21' },
+            { Driver: 'Mark Webber', Finish: null },
+            { Driver: 'James Hunt', Finish: '1:02:45' },
+            { Driver: 'Ralph Schumacher', Finish: '1:04:82' },
+            { Driver: 'Kimi Raikkonen', Finish: '1:00:84' }];
 
         const t = 12; // if in future want a different number, change this
         url = "top12.php"
-        fetchtop12();
-        setInterval(fetchtop12, 1000);// Interval checking for new data
-        function fetchtop12() {
-            fetch(url)
-            .then(response => response.json())
-            .then(data => {
+        // fetchtop12();
+        // setInterval(fetchtop12, 1000);// Interval checking for new data
+        // function fetchtop12() {
+        //     fetch(url)
+        //     .then(response => response.json())
+        //     .then(data => {
             data = testData;
-            console.log("data", data)
+        //     console.log("data", data)
             build(data)
-            })
-            .catch(error => {
-                console.log(error);
-                fetchlatest();
-            });    
-        }
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //         fetchtop12();
+        //     });    
+        // }
         function build(content) {//build
             console.log('content?', content)
 

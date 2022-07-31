@@ -2,14 +2,28 @@
     position: absolute;
     top: 16px;
     left: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    border-collapse: separate;
+    border-spacing: 0 10px;
 }
 
 .top12-row {
     background-color: aqua;
-    box-shadow: 2px 4px black;
-    margin-bottom: 5px;
+    box-shadow: 2px 2px black;
+    border-radius: 4px;
 }
 
 .top12-position {
     background-color: white;
+}
+
+.top12-position,
+.top12-driver,
+.top12-time {
+    padding: 4px;
+}
+
+.top12-time {
+    border-radius: 2px 2px 2px 2px;
 }
