@@ -38,7 +38,7 @@
         //     { Driver: 'Kimi Raikkonen', Finish: '1:00:84' }];
 
         const t = 12; // if in future want a different number, change this
-        url = "top12.php"
+        url = "top12.php" + window.location.search
         fetchtop12();
         setInterval(fetchtop12, 1000);// Interval checking for new data
         function fetchtop12() {
