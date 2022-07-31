@@ -1,0 +1,15 @@
+.top12-table {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+}
+
+.top12-row {
+    background-color: aqua;
+    box-shadow: 2px 4px black;
+    margin-bottom: 5px;
+}
+
+.top12-position {
+    background-color: white;
+}
