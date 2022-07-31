@@ -30,16 +30,15 @@
         //     { Driver: 'Michael Schumacher', Finish: '1:02:43' },
         //     { Driver: 'Nigel Mansell', Finish: '1:04:23' },
         //     { Driver: 'David Coulthard', Finish: '1:09:97' },
-        //     { Driver: 'Jackie Steward', Finish: '1:12:69' },
-        //     { Driver: 'Jensen Button', Finish: '1:03:21' },
-        //     { Driver: 'Mark Webber', Finish: null },
-        //     { Driver: 'James Hunt', Finish: '1:02:45' },
-        //     { Driver: 'Ralph Schumacher', Finish: '1:04:82' },
-        //     { Driver: 'Kimi Raikkonen', Finish: '1:00:84' }];
+            // { Driver: 'Jackie Steward', Finish: '1:12:69' },
+            // { Driver: 'Jensen Button', Finish: '1:03:21' },
+            // { Driver: 'Mark Webber', Finish: null },
+            // { Driver: 'James Hunt', Finish: '1:02:45' },
+            // { Driver: 'Ralph Schumacher', Finish: '1:04:82' },
+            // { Driver: 'Kimi Raikkonen', Finish: '1:00:84' }];
 
         const t = 12; // if in future want a different number, change this
         url = "top12.php" + window.location.search;
-        console.log('url', url);
         fetchtop12();
         setInterval(fetchtop12, 1000);// Interval checking for new data
         function fetchtop12() {
@@ -48,12 +47,12 @@
                 .then(data => {
                     console.log("data", data)
                     console.log("data", data.length)
-                    // data = testData;
-                    build(data)
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+            // data = testData;
+            build(data)
+            })
+            .catch(error => {
+                console.log(error);
+            });
         }
         function build(content) {//build
             if (content.length === 0) {
@@ -65,14 +64,17 @@
 
             let tableRows = "";
             for (i = 0; i < t; i++) {
-                tableRows += '<tr class="top12-row"><td class="top12-position">' + (i + 1) + '</td>'
-                    + '<td class="top12-driver">' + content[i].Driver + '</td>';
+                if (content[i]) {
 
-                if (content[i].Finish !== null) {
-                    tableRows += '<td class="top12-time">' + content[i].Finish + '</td></tr>'
-                } else {
-                    tableRows += '<td class="top12-time">-</td></tr>'
+                    tableRows += '<tr class="top12-row"><td class="top12-position">' + (i + 1) + '</td>'
+                        + '<td class="top12-driver">' + content[i].Driver + '</td>';
 
+                    if (content[i].Finish !== null) {
+                        tableRows += '<td class="top12-time">' + content[i].Finish + '</td></tr>'
+                    } else {
+                        tableRows += '<td class="top12-time">-</td></tr>'
+
+                    }
                 }
             }
             document.getElementById('top12').innerHTML += tableRows;
