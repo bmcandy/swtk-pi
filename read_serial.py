@@ -36,12 +36,17 @@ def UpdateResults(carno="",ftime="",rs=""):
 	global colcolour
 	# Establish the class for the car
 	cur.execute('''SELECT * FROM Entries WHERE Car=%s;''' % ("'"+carno+"'"))
-	entry=cur.fetchone()
-	vclass=entry[5]
-	cur.execute('''SELECT Car,Best FROM (SELECT Car,Least(COALESCE(Timed1,Timed2),COALESCE(Timed2,Timed1),COALESCE(Timed3,Timed1),COALESCE(Timed4,Timed1)) AS Best from ClassResults where Class = %s order by Best) As Dave WHERE Best > 0 ORDER BY Best;''' % ("'"+str(vclass)+"'"))
 	if cur.rowcount:
-		classfastest = cur.fetchone()
+		entry=cur.fetchone()
+		vclass=entry[5]
+		cur.execute('''SELECT Car,Best FROM (SELECT Car,Least(COALESCE(Timed1,Timed2),COALESCE(Timed2,Timed1),COALESCE(Timed3,Timed1),COALESCE(Timed4,Timed1)) AS Best from ClassResults where Class = %s order by Best) As Dave WHERE Best > 0 ORDER BY Best;''' % ("'"+str(vclass)+"'"))
+		if cur.rowcount:
+			classfastest = cur.fetchone()
+		else:
+			classfastest = ["Nobody", 999.999]
 	else:
+		print "unknown class"
+		vclass = "Unknown"
 		classfastest = ["Nobody", 999.999]
 	
 	# Get results so far
