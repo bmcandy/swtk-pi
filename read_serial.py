@@ -77,7 +77,7 @@ def UpdateResults(carno="",ftime="",rs=""):
 				else:
 					colcolour = "00c2cb"
 					break
-				print str(type(ftime))
+				#print str(type(ftime))
 				if float(classfastest[1]) > float(ftime) and (classfastest[1]) < 999.99:
 
 					print "\n\n*** Fastest ***\n\n"
