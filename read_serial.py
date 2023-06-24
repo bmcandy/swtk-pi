@@ -57,13 +57,12 @@ def UpdateResults(carno="",ftime="",rs=""):
 			ftime=999.999
 		RunColumns=["","Practice1","Practice2","Timed1","Timed2","Timed3","Timed4"]
 		fastest = 999.999
-		for x in range(1,7):
-			if x > 1:
-				if results[x] is None:
-					skip = 1
-				else:
-					if fastest > float(results[x]):
-						fastest = float(results[x])
+		for x in range(1,6):
+			if results[x] is None:
+				skip = 1
+			else:
+				if fastest > float(results[x]):
+					fastest = float(results[x])
 			if results[x] is None:
 				print " Recording run "+str(x)+" ... Car: "+str(results[0])+"    Time: "+str(ftime)
 				# Update the first empty column in the row for that car
