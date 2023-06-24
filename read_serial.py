@@ -121,9 +121,11 @@ def RecordFinish(result):
 		print "No time recorded: re-run expected"
 		finishtime="999.999"
 		runstate="RERUN"
+		colcolour="ff3399"
 	elif finishtime == "FAIL": # Change this for what is expected to be a FAIL
 		print "No time recorded: Failed run"
 		runstate="FAIL"
+		colcolour="ff0000"
 		UpdateResults(carnumber,finishtime,runstate) # update the results table with a FAIL
 	else:
 		runstate="Normal"
