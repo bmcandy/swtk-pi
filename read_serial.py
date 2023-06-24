@@ -71,7 +71,7 @@ def UpdateResults(carno="",ftime="",rs=""):
 				print repr(ftime)
 				ftime = ftime.replace("\x00","")
 				print "Values#This:"+str(ftime)+"#Best:"+str(fastest)+"#ClassBest:"+str(classfastest[1])+"#"
-				print "Types#This:"+str(type(ftime))+"#Best:"+str(type(fastest))+"#ClassBest:"+str(type(classfastest[1]))+"#"
+				#print "Types#This:"+str(type(ftime))+"#Best:"+str(type(fastest))+"#ClassBest:"+str(type(classfastest[1]))+"#"
 				if ftime.replace('.','',1).isdigit():
 					ftime = float(ftime)
 				else:
@@ -132,7 +132,7 @@ def RecordFinish(result):
 	else:
 		runstate="Normal"
 		UpdateResults(carnumber,finishtime,runstate) # Update the results table with time
-	print "DBupdate#CarNo:"+carnumber+"#64:"+sixtyfour+"#split:"+splittime+"#Finish:"+finishtime+"#Colour:"+colcolour+"#"
+	print "DBupdate#CarNo:"+carnumber+"#64:"+sixtyfour+"#split:"+splittime+"#Finish:"+finishtime+"#Colour:"+colcolour+"#\n"
 	
 	# Record raw results in the SQL table
 	cur.execute('''INSERT INTO RawResults(Car,SixtyFour,Split,Finish,RunState,Colour) VALUES(%s,%s,%s,%s,%s,%s);''',(carnumber,sixtyfour,splittime,finishtime,runstate,colcolour))
