@@ -70,8 +70,8 @@ def UpdateResults(carno="",ftime="",rs=""):
 				cur.execute('''UPDATE ClassResults SET {} = %s WHERE Car = %s;'''.format(RunColumns[x]),(ftime,carno))
 				print repr(ftime)
 				ftime = ftime.replace("\x00","")
-				print "#"+str(ftime)+"#"+str(fastest)+"#"+str(classfastest[1])+"#"
-				print "#"+str(type(ftime))+"#"+str(type(fastest))+"#"+str(type(classfastest[1]))+"#"
+				print "Values#This:"+str(ftime)+"#Best:"+str(fastest)+"#ClassBest:"+str(classfastest[1])+"#"
+				print "Types#This:"+str(type(ftime))+"#Best:"+str(type(fastest))+"#ClassBest:"+str(type(classfastest[1]))+"#"
 				if ftime.replace('.','',1).isdigit():
 					ftime = float(ftime)
 				else:
@@ -93,7 +93,7 @@ def UpdateResults(carno="",ftime="",rs=""):
 	else:
 		print "First run ... Car: "+carno+"    Time: "+ftime
 		cur.execute('''INSERT INTO ClassResults(Car,Practice1,Class) VALUES(%s,%s,%s);''',(carno,ftime,vclass))
-		print "no results yet"
+		print "No results yet"
 
 # Record the raw result
 def RecordFinish(result):
@@ -111,7 +111,7 @@ def RecordFinish(result):
 	# Read secxond line of text
 	#x=ser.readline()
 	x=result.split("\r")[1]
-	print "#"+x+"#"
+	print "Result#"+x+"#"
 	# Find s=64 foot and split times from second line of text
 	sixtyfour=x.split("   ")[1].split(" ")[0]
 	splittime=x.split("  ")[2].split("\r")[0]
@@ -132,7 +132,7 @@ def RecordFinish(result):
 	else:
 		runstate="Normal"
 		UpdateResults(carnumber,finishtime,runstate) # Update the results table with time
-	print "#"+carnumber+"#"+sixtyfour+"#"+splittime+"#"+finishtime+"#"+colcolour+"#"
+	print "DBupdate#CarNo:"+carnumber+"#64:"+sixtyfour+"#split:"+splittime+"#Finish:"+finishtime+"#Colour:"+colcolour+"#"
 	
 	# Record raw results in the SQL table
 	cur.execute('''INSERT INTO RawResults(Car,SixtyFour,Split,Finish,RunState,Colour) VALUES(%s,%s,%s,%s,%s,%s);''',(carnumber,sixtyfour,splittime,finishtime,runstate,colcolour))
