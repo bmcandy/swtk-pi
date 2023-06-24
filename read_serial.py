@@ -97,6 +97,7 @@ def UpdateResults(carno="",ftime="",rs=""):
 # Record the raw result
 def RecordFinish(result):
 	# Initialise variables
+	global colcolour
 	carnumber=""
 	sixtyfour=""
 	splittime=""
