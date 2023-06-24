@@ -117,7 +117,7 @@ def RecordFinish(result):
 	if len(sixtyfour) == 0:
 		sixtyfour="0.00"
 	# Deal with failed runs
-	if finishtime == "NTR": # change this for what is expected to be a RERUN
+	if finishtime == "NTR" or finishtime == "Red Flag": # change this for what is expected to be a RERUN
 		print "No time recorded: re-run expected"
 		finishtime="999.999"
 		runstate="RERUN"
@@ -125,9 +125,6 @@ def RecordFinish(result):
 		print "No time recorded: Failed run"
 		runstate="FAIL"
 		UpdateResults(carnumber,finishtime,runstate) # update the results table with a FAIL
-	elif finishtime == "Red Flag": # Change this for what is expected to be a RERUN
-		print "No time recorded: re-run Expected"
-		runstate="RERUN"
 	else:
 		runstate="Normal"
 		UpdateResults(carnumber,finishtime,runstate) # Update the results table with time
