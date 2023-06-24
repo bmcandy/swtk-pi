@@ -92,6 +92,7 @@ def UpdateResults(carno="",ftime="",rs=""):
 	else:
 		print "First run ... Car: "+carno+"    Time: "+ftime
 		cur.execute('''INSERT INTO ClassResults(Car,Practice1,Class) VALUES(%s,%s,%s);''',(carno,ftime,vclass))
+		colcolour = "00c2cb"
 		print "No results yet"
 
 # Record the raw result
