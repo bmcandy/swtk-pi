@@ -34,7 +34,7 @@
                 document.getElementById('hdr').innerHTML = ""
                 hdr =""; 
                 hdr += '<div style="padding-bottom:10px"><div id="lap">'
-                hdr += "Class "+ content[0].Class +'</div></div>'
+                hdr += content[0].Class +'</div></div>'
                 document.getElementById('hdr').innerHTML = hdr;
                 hdr =""; 
                 //Leaderboard
@@ -45,13 +45,13 @@
                     
 
                     console.log("i",i); 
-                    ldb += '<div class="driverContainer"><div class="driverLeft"><div class="driverPosition">' + (i+1) + '</div><span class="line best"></span><div class="driverName">' + content[i].Driver + '</div></div>'
+                    ldb += '<div class="driverContainer"><div class="driverLeft"><div class="driverPosition">' + (i+1) + '</div><!--<span class="line best"></span>--><div class="driverName">' + content[i].Driver + '</div></div>'
 
                     if (content[i].Best === null) {
                         ldb += '<div class="driverRight"><div class="driverInterval"></div></div></div>';
                 
                     } else {
-                        ldb += '<div class="driverRight"><div class="driverInterval">' + content[i].Best  + '</div></div></div>';
+                        ldb += '<div class="driverRight"><div class="driverInterval">' + content[i].Best.match(/^-?\d+(?:\.\d{0,2})?/)[0]  + '</div></div></div>';
                     }
 
                     document.getElementById('ldb').innerHTML += ldb;

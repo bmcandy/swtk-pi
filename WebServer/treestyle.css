@@ -55,7 +55,8 @@ body {
 .driverContainer {
   display: flex;
   width: 400px;
-  height: 30px;
+  height: 36px;
+  padding: 3px;
   background: transparent;
   transition: all 0.5;
 }
@@ -78,14 +79,14 @@ body {
   height: 26px;
   text-align: center;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 24px;
   border-radius: 6px 6px 6px 6px;
   margin: 2px;
   
 }
 .driverName {
-  width: 220px;
+  width: 200px;
   color: #00c2cb;
   margin: 2px;
   font-size: 18px;
@@ -93,7 +94,7 @@ body {
   text-align: left;
 }
 .driverRight {
-  width: 90px;
+  width: 60px;
   background: rgba(0, 0, 0, 0.8);
   font-size: 20px;
   padding: 3px;
