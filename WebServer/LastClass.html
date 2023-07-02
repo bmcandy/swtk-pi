@@ -2,5 +2,59 @@
 <html>
     <head>
         <title>Tree</title>
+        <html style ="width: 1920px; overflow :hidden">
+            <link rel="stylesheet" href="style.css">
     </head>
+    <body>
+        <script>
+            url = "getlastclass.php"
+            fetchlastclass();
+            setInterval(fetchlastclass,1000);// Interval checking for new data
+            function fetchlastclass(){
+                fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    build(data);
+                })
+                .catch(error => {
+                    console.log(error);
+                    fetchlastclass()
+                });
+            }
+            function build(content) {//build
+                if (content.length == 0) return;
+                //Header
+                document.getElementById('hdr').innerHTML = ""
+                hdr =""; 
+                hdr += '<div class="cntr2"><div class="txtr">'
+                hdr += '<div class="txtc txtch2">' + "Class: "+ content[0].Class +'</div>'
+                document.getElementById('hdr').innerHTML = hdr;
+                hdr =""; 
+                //Leaderboard
+                t= content.length -1;
+                ldb = ""
+                document.getElementById('ldb').innerHTML = ""
+                for (i = 0; i <= t; i++) {
+                    
+
+                    console.log("i",i); 
+                    ldb += '<div class="cntr2"><div class="txtr">'
+                    ldb += '<div class="txtc txtcr2">' + (i+1)  + '</div>';
+                    ldb += '<div class="txtc txtcd2">' + content[i].Driver  + '</div>';
+
+                    if (content[i].Best === null) {
+                        ldb += '<div class="txtc txtcf2">Not Run Yet</div>';
+                
+                    } else {
+                        ldb += '<div class="txtc txtcf2">' + content[i].Best  + '</div>';
+
+                    }
+
+                    ldb += '</div></div>'
+                    document.getElementById('ldb').innerHTML += ldb;
+                    ldb =""; 
+                }    
+            }
+        </script>
+    </body>
 </html>
