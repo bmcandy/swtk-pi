@@ -3,13 +3,17 @@
     <head>
         <title>Tree</title>
         <html style ="width: 1920px; overflow :hidden">
-            <link rel="stylesheet" href="style.css">
+            <link rel="stylesheet" href="treestyle.css">
     </head>
     <body>
-        <div class = "treeouter">
-        <div ID="hdr"></div>
-        <div ID="ldb"></div>
-        </div>             
+        <section id="leaderboard">
+            <div style="transform: none;">
+                <div id="hdr">
+                </div>
+                <div id="ldb">
+                </div>
+            </div>
+        </section>
         <script>
             url = "getlastclass.php"
             fetchlastclass();
@@ -30,9 +34,8 @@
                 //Header
                 document.getElementById('hdr').innerHTML = ""
                 hdr =""; 
-                hdr += '<div class="cntr2"><div class="txtr">'
-                hdr += '<div class="txtc txtch2">' + "Class: "+ content[0].Class +'</div>'
-                hdr += '</div></div>'
+                hdr += '<div style="padding-bottom:10px"><div id="lap">'
+                hdr += "Class "+ content[0].Class +'</div></div>'
                 document.getElementById('hdr').innerHTML = hdr;
                 hdr =""; 
                 //Leaderboard
@@ -43,19 +46,15 @@
                     
 
                     console.log("i",i); 
-                    ldb += '<div class="cntr2"><div class="txtr">'
-                    ldb += '<div class="txtc txtcr2">' + (i+1)  + '</div>';
-                    ldb += '<div class="txtc txtcd2">' + content[i].Driver  + '</div>';
+                    ldb += '<div class="driverContainer"><div class="driverLeft"><div class="driverPosition">' + (i+1) + '</div><span class="line best"></span><div class="driverName">' + content[i].Driver + '</div></div>'
 
                     if (content[i].Best === null) {
-                        ldb += '<div class="txtc txtcf2">Not Run Yet</div>';
+                        ldb += '<div class="driverRight"><div class="driverInterval"></div></div></div>';
                 
                     } else {
-                        ldb += '<div class="txtc txtcf2">' + content[i].Best  + '</div>';
-
+                        ldb += '<div class="driverRight"><div class="driverInterval">' + content[i].Best  + '</div></div></div>';
                     }
 
-                    ldb += '</div></div>'
                     document.getElementById('ldb').innerHTML += ldb;
                     ldb =""; 
                 }    
