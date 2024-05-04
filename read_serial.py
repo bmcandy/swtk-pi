@@ -3,9 +3,9 @@
 import time
 import serial
 import MySQLdb #apt-get install python-mysqldb
-import pyttsx3  # pip install pyttsx3
+#import pyttsx3  # pip install pyttsx3
 
-engine = pyttsx3.init()
+#engine = pyttsx3.init()
 colcolour = "00c2cb"
 
 # BUGS
@@ -51,13 +51,10 @@ def speak_finish_time(car, driver, time, split, sixtyfour=None):
 		message = message + " and a sixty four foot time of " + sixtyfour + " seconds"
 
 	print(message)
-	engine.say(message)
-	engine.runAndWait()
-	engine.startLoop(False)
-	# engine.iterate() must be called inside Server_Up.start()
-	# Server_Up = threading.Thread(target=Comm_Connection)
-	# Server_Up.start()
-	engine.endLoop()
+#	engine.say(message)
+#	engine.runAndWait()
+#	engine.startLoop(False)
+#	engine.endLoop()
 
 # Update results table
 def UpdateResults(carno="",ftime="",rs=""):
