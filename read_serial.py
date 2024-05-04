@@ -3,6 +3,9 @@
 import time
 import serial
 import MySQLdb #apt-get install python-mysqldb
+import pyttsx3  # pip install pyttsx3
+
+engine = pyttsx3.init()
 colcolour = "00c2cb"
 
 # BUGS
@@ -31,6 +34,34 @@ except MySQLdb.Error as e:
 	print e
 cur = conn.cursor()
 	
+def speak_finish_time(car, driver, time, split, sixtyfour=None):
+    """Function to speak the finish time of the driver."""
+    message = (
+        "Car number "
+        + car
+	)
+	if driver:
+        message = message + " driven by " + driver
+	message = (
+		message +
+        + " finished in "
+        + time
+        + " seconds"
+    )
+    if split:
+        message = message + " with a split of " + split + " seconds"
+    if sixtyfour:
+        message = message + " and a sixty four foot time of " + sixtyfour + " seconds"
+
+    print(message)
+    engine.say(message)
+    engine.runAndWait()
+    engine.startLoop(False)
+    # engine.iterate() must be called inside Server_Up.start()
+    # Server_Up = threading.Thread(target=Comm_Connection)
+    # Server_Up.start()
+    engine.endLoop()
+
 # Update results table
 def UpdateResults(carno="",ftime="",rs=""):
 	global colcolour
@@ -137,6 +168,9 @@ def RecordFinish(result):
 	# Record raw results in the SQL table
 	cur.execute('''INSERT INTO RawResults(Car,SixtyFour,Split,Finish,RunState,Colour) VALUES(%s,%s,%s,%s,%s,%s);''',(carnumber,sixtyfour,splittime,finishtime,runstate,colcolour))
 	conn.commit()
+
+	# Read out the results
+	speak_finish_time(carnumber, None, finishtime, splittime, sixtyfour)
 
 # Just keep looping...
 while 1:
