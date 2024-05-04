@@ -41,26 +41,26 @@ def speak_finish_time(car, driver, time, split, sixtyfour=None):
         + car
 	)
 	if driver:
-        message = message + " driven by " + driver
+		message = message + " driven by " + driver
 	message = (
 		message +
         + " finished in "
         + time
         + " seconds"
     )
-    if split:
-        message = message + " with a split of " + split + " seconds"
-    if sixtyfour:
-        message = message + " and a sixty four foot time of " + sixtyfour + " seconds"
+	if split:
+		message = message + " with a split of " + split + " seconds"
+	if sixtyfour:
+		message = message + " and a sixty four foot time of " + sixtyfour + " seconds"
 
-    print(message)
-    engine.say(message)
-    engine.runAndWait()
-    engine.startLoop(False)
-    # engine.iterate() must be called inside Server_Up.start()
-    # Server_Up = threading.Thread(target=Comm_Connection)
-    # Server_Up.start()
-    engine.endLoop()
+	print(message)
+	engine.say(message)
+	engine.runAndWait()
+	engine.startLoop(False)
+	# engine.iterate() must be called inside Server_Up.start()
+	# Server_Up = threading.Thread(target=Comm_Connection)
+	# Server_Up.start()
+	engine.endLoop()
 
 # Update results table
 def UpdateResults(carno="",ftime="",rs=""):
