@@ -40,7 +40,7 @@ def speak_finish_time(car, driver, time, split, sixtyfour=None):
 	if driver:
 		message = message + " driven by " + driver
 	message = (
-		message +
+		message
         + " finished in "
         + time
         + " seconds"
