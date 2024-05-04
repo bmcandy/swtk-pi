@@ -35,11 +35,8 @@ except MySQLdb.Error as e:
 cur = conn.cursor()
 	
 def speak_finish_time(car, driver, time, split, sixtyfour=None):
-    """Function to speak the finish time of the driver."""
-    message = (
-        "Car number "
-        + car
-	)
+	"""Function to speak the finish time of the driver."""
+	message = "Car number " + car
 	if driver:
 		message = message + " driven by " + driver
 	message = (
