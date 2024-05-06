@@ -156,6 +156,12 @@ def car_finished(car):
 reader = RawResultsReader("192.168.69.32", "Results", "Results", "SpeedOnScreen")
 
 while True:
-    reader.get_latest_from_mysql()
-    time.sleep(3)
+    try:
+        reader.get_latest_from_mysql()
+        time.sleep(3)
+    except:
+        print("failed to get time")
+        reader.close()
+        reader = RawResultsReader("192.168.69.32", "Results", "Results", "SpeedOnScreen")
+        time.sleep(5)
 reader.close()
