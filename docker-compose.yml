@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  read_serial:
+    build:
+      context: ./read_serial
+      dockerfile: Dockerfile
+    container_name: read_serial_container
+    depends_on:
+      - mariadb
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+    devices:
+      - "/dev/ttyS0:/dev/ttyS0"
+    restart: unless-stopped
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb_container
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --init-file=/docker-entrypoint-initdb.d/init.sql
+    volumes:
+      - ~/swtk/database:/var/lib/mysql
+      - ./database/SpeedOnScreen.sql:/docker-entrypoint-initdb.d/SpeedOnScreen.sql
+      - ./database/init_resolved.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+
+  api3:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: api_container
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./api:/app
+    command: python3 /app/api3.py
