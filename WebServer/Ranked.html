@@ -45,24 +45,26 @@ function build(content) {//build
     hdr += '</div></div>'
     document.getElementById('hdr').innerHTML = hdr;
     hdr =""; 
-     //Leaderboard
-    t= content.length -1;
+    //Leaderboard
+    t = content.length - 1;
     ldb = ""
     document.getElementById('ldb').innerHTML = ""
-    for (i = 0; i <= t; i++) {
-        
 
-        console.log("i",i); 
+    // Find the lowest value of Best
+    let minBest = Math.min(...content.map(item => item.Best !== null ? item.Best : Infinity));
+
+    for (i = 0; i <= t; i++) {
+        console.log("i", i); 
         ldb += '<div class="cntr2"><div class="txtr">'
         ldb += '<div class="txtc txtcr2">' + (i+1)  + '</div>';
         ldb += '<div class="txtc txtcd2">' + content[i].Driver  + '</div>';
 
         if (content[i].Best === null) {
             ldb += '<div class="txtc txtcf2">Not Run Yet</div>';
-    
+            ldb += '<div class="txtc txtcf2"></div>';
         } else {
-            ldb += '<div class="txtc txtcf2">' + content[i].Best  + '</div>';
-
+            ldb += '<div class="txtc txtcf2">' + parseFloat(content[i].Best).toFixed(2)  + '</div>';
+            ldb += '<div class="txtc txtcf2">+' + (parseFloat(content[i].Best - minBest).toFixed(2)) + '</div>';
         }
 
         ldb += '</div></div>'

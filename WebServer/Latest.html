@@ -62,9 +62,9 @@ function build(content) {//build
         ldb += '<div class="txtc txtcd">' + content[i].Driver  + '</div>';
         ldb += '<div class="txtc txtcm">' + content[i].MakeModel  + '</div>';
         ldb += '<div class="txtc txtcl">' + content[i].Class  + '</div>';
-        ldb += '<div class="txtc txtc6">' + content[i].SixtyFour  + '</div>';
-        ldb += '<div class="txtc txtcs">' + content[i].Split  + '</div>';
-        ldb += '<div class="txtc txtcf">' + content[i].Finish  + '</div>';
+        ldb += '<div class="txtc txtc6">' + parseFloat(content[i].SixtyFour).toFixed(2)  + '</div>';
+        ldb += '<div class="txtc txtcs">' + parseFloat(content[i].Split).toFixed(2)  + '</div>';
+        ldb += '<div class="txtc txtcf">' + parseFloat(content[i].Finish).toFixed(2)  + '</div>';
         ldb += '</div></div>'
         document.getElementById('ldb').innerHTML += ldb;
         ldb =""; 
