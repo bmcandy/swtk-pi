@@ -7,11 +7,14 @@ WORKDIR /app
 # Copy the application files to the container
 COPY . /app
 
-# Install required Python packages
+# Install mysql connector for Python
 RUN pip install --no-cache-dir mysql-connector-python
 
 # Install pyserial for serial communication
 RUN pip install --no-cache-dir pyserial
+
+# Install python-dotenv for environment variable management
+RUN pip install --no-cache-dir python-dotenv
 
 # Set the command to run the Python script
 CMD ["python", "read_serial3.py"]
