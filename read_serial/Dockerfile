@@ -17,4 +17,4 @@ RUN pip install --no-cache-dir pyserial
 RUN pip install --no-cache-dir python-dotenv
 
 # Set the command to run the Python script
-CMD ["python", "read_serial3.py"]
+CMD ["python3", "read_serial3.py"]

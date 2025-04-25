@@ -1,12 +1,15 @@
 #!/usr/bin/env python
 
-import time
 import serial
 import mysql.connector
 from dotenv import load_dotenv  # pip install python-dotenv
 import os
 
+# Load environment variables from .env file
+load_dotenv()
+
 # Initialize serial interface
+print("Initializing serial interface...")
 ser = serial.Serial(
     port='/dev/ttyS0',
     baudrate=1200,
@@ -24,8 +27,9 @@ def connect_to_database():
             password=os.getenv("DB_PASSWORD"),
             host=os.getenv("DB_HOST"),
             port=3306,
-            database="SpeedOnScreen"
+            database=os.getenv("DB_NAME")
         )
+        print("Connected to database")
         return conn
     except mysql.connector.Error as e:
         print(e)
@@ -34,6 +38,7 @@ def connect_to_database():
 conn = connect_to_database()
 if conn:
     cur = conn.cursor()
+    print("Database cursor created")
 
 def speak_finish_time(car, driver, time, split, sixtyfour=None):
     """Function to speak the finish time of the driver."""
@@ -103,28 +108,34 @@ def record_finish(result):
     x = result.split("\r")[1]
     sixtyfour = x.split("   ")[1].split(" ")[0]
     splittime = x.split("  ")[2].split("\r")[0]
+    print(f"Car: {carnumber}, Time: {finishtime}, 64ft: {sixtyfour}, Split: {splittime}")
 
     if finishtime in ["NTR", "Red Flag"]:
         finishtime = "999.999"
         runstate = "RERUN"
     elif finishtime == "FAIL":
         runstate = "FAIL"
+        print("updating results (%s, %s, %s)" % (carnumber, finishtime, runstate))
         update_results(carnumber, finishtime, runstate)
     else:
         runstate = "Normal"
+        print("updating results (%s, %s, %s)" % (carnumber, finishtime, runstate))
         update_results(carnumber, finishtime, runstate)
 
+    print("Inserting into RawResults (%s, %s, %s, %s, %s)" % (carnumber, sixtyfour, splittime, finishtime, runstate))
+    # Insert into RawResults
     cur.execute(
         "INSERT INTO RawResults(Car, SixtyFour, Split, Finish, RunState) VALUES(%s, %s, %s, %s, %s)",
         (carnumber, sixtyfour, splittime, finishtime, runstate),
     )
     conn.commit()
 
-    speak_finish_time(carnumber, None, finishtime, splittime, sixtyfour)
+    # speak_finish_time(carnumber, None, finishtime, splittime, sixtyfour)
 
 # Main loop
 while True:
     x = ser.readline().decode("utf-8")
     if "Car:" in x:
+        print(f"Received: {x}")
         record_finish(x)
 
