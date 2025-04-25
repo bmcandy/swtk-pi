@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebServer Index</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>WebServer Index</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Page</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="top12.html">top12.html</a></td>
+                <td>Displays the top 12 drivers and their finish times.</td>
+            </tr>
+            <tr>
+                <td><a href="Ranked.html">Ranked.html</a></td>
+                <td>Shows ranked results per class with the best times and intervals.</td>
+            </tr>
+            <tr>
+                <td><a href="RankedPersistent.html">RankedPersistent.html</a></td>
+                <td>Displays persistent ranked results per class with the best times and intervals.</td>
+            </tr>
+            <tr>
+                <td><a href="Latest.html">Latest.html</a></td>
+                <td>Displays the latest runs with details like driver, car, and times.</td>
+            </tr>
+            <tr>
+                <td><a href="LastClass.html">LastClass.html</a></td>
+                <td>Shows the leaderboard for the last class that ran.</td>
+            </tr>
+            <tr>
+                <td><a href="top12.php">top12.php</a></td>
+                <td>Fetches the top 12 results from the database in JSON format.</td>
+            </tr>
+            <tr>
+                <td><a href="getranked.php">getranked.php</a></td>
+                <td>Fetches ranked results for a specific class from the database.</td>
+            </tr>
+            <tr>
+                <td><a href="getlatest.php">getlatest.php</a></td>
+                <td>Fetches the latest runs from the database in JSON format.</td>
+            </tr>
+            <tr>
+                <td><a href="getlastclass.php">getlastclass.php</a></td>
+                <td>Fetches the leaderboard for the last class that ran from the database.</td>
+            </tr>
+            <tr>
+                <td><a href="classes.html">classes.html</a></td>
+                <td>Displays a list of available classes and their ranked results on selection.  Used for selecting which class is shown on RankedPersistent.html and useful for remote selection of graphics on the live timing screen.</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

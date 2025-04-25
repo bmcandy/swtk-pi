@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        async function fetchClasses() {
+            try {
+                const response = await fetch('getclasses.php');
+                const classes = await response.json();
+                const container = document.getElementById('class-container');
+                let column = document.createElement('div');
+                column.className = 'column';
+                classes.forEach((cls, index) => {
+                    if (index > 0 && index % 10 === 0) {
+                        container.appendChild(column);
+                        column = document.createElement('div');
+                        column.className = 'column';
+                    }
+                    const tile = document.createElement('div');
+                    tile.className = 'cntr';
+                    tile.style.cursor = 'pointer';
+                    tile.textContent = cls;
+                    tile.addEventListener('click', () => fetchRanked(cls));
+                    column.appendChild(tile);
+                });
+                container.appendChild(column);
+            } catch (error) {
+                console.error('Error fetching classes:', error);
+            }
+        }
+
+        async function fetchRanked(cls) {
+            try {
+                const response = await fetch(`getpersistentranked.php?class=${encodeURIComponent(cls)}`);
+                const rankedData = await response.json();
+                const results = document.getElementById('results');
+                results.innerHTML = ``;
+                const table = document.createElement('table');
+                table.innerHTML = `
+                    <tr class="cntr">
+                        <th>${cls}</th>
+                        <th>Best</th>
+                    </tr>
+                `;
+                rankedData.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.classList.add('cntr');
+                    tr.innerHTML = `
+                        <td class="txtc txtcd">${row.Driver}</td>
+                        <td class="txtc txtcf">${row.Best}</td>
+                    `;
+                    table.appendChild(tr);
+                });
+                results.appendChild(table);
+            } catch (error) {
+                console.error('Error fetching ranked data:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchClasses);
+    </script>
+    <style>
+        .column {
+            display: inline-block;
+            vertical-align: top;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Available Classes</h1>
+    <div id="class-container"></div>
+    <div id="results"></div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+- (c) Franky Vanroy 2022
+- Script created for Andy Laurence
+- Fetching the data of the Ranked runs
+- and populating a  graphic  
+- Which class to fetch can be set in a query string  
+-->
+<html>
+    <head>
+    <html style ="width: 1920px; overflow :hidden">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Ranked per class</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+<div class = "outer2">
+<div ID="hdr"></div>
+<div ID="ldb"></div>
+</div>  
+<script>
+url = "getpersistentranked.php" + window.location.search
+fetchranked();
+setInterval(fetchranked,1000);// Interval checking for new data
+function fetchranked(){
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        build(data);
+    })
+    .catch(error => {
+            console.log(error);
+            fetchranked()
+    });    
+}
+function build(content) {//build
+    if (content.length == 0) return;
+    //Header
+    document.getElementById('hdr').innerHTML = ""
+    hdr =""; 
+    hdr += '<div class="cntr2"><div class="txtr">'
+    hdr += '<div class="txtc txtch2">' + "Class: "+ content[0].Class +'</div>'
+    hdr += '</div></div>'
+    document.getElementById('hdr').innerHTML = hdr;
+    hdr =""; 
+    //Leaderboard
+    t = content.length - 1;
+    ldb = ""
+    document.getElementById('ldb').innerHTML = ""
+
+    // Find the lowest value of Best
+    let minBest = Math.min(...content.map(item => item.Best !== null ? item.Best : Infinity));
+
+    for (i = 0; i <= t; i++) {
+        console.log("i", i); 
+        ldb += '<div class="cntr2"><div class="txtr">'
+        ldb += '<div class="txtc txtcr2">' + (i+1)  + '</div>';
+        ldb += '<div class="txtc txtcd2">' + content[i].Driver  + '</div>';
+
+        if (content[i].Best === null) {
+            ldb += '<div class="txtc txtcf2">Not Run Yet</div>';
+            ldb += '<div class="txtc txtcf2"></div>';
+        } else {
+            ldb += '<div class="txtc txtcf2">' + parseFloat(content[i].Best).toFixed(2)  + '</div>';
+            ldb += '<div class="txtc txtcf2">+' + (parseFloat(content[i].Best - minBest).toFixed(2)) + '</div>';
+        }
+
+        ldb += '</div></div>'
+        document.getElementById('ldb').innerHTML += ldb;
+        ldb =""; 
+    }    
+}//build
+    </script>
+</body>
+</html>
