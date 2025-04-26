@@ -49,10 +49,10 @@
                         // Skip time difference for the top row (i === 0)
                         ldb += '<div class="driverRight"><div class="driverInterval"></div><div class="driverDifference"></div></div></div>';
                     } else if (i == 0) {
-                        ldb += '<div class="driverRight"><div class="driverInterval">' + parseFloat(content[i].Best.match(/^-?\d+(?:\.\d{0,2})?/)[0]) + '</div><div class="driverDifference"></div></div></div>';
+                        ldb += '<div class="driverRight"><div class="driverInterval">' + parseFloat(content[i].Best).toFixed(2) + '</div><div class="driverDifference"></div></div></div>';
                     } else {
-                        let bestValue = parseFloat(content[i].Best.match(/^-?\d+(?:\.\d{0,2})?/)[0]);
-                        let topBestValue = parseFloat(content[0].Best.match(/^-?\d+(?:\.\d{0,2})?/)[0]);
+                        let bestValue = parseFloat(content[i].Best).toFixed(2);
+                        let topBestValue = parseFloat(content[0].Best).toFixed(2);
                         let difference = (bestValue - topBestValue).toFixed(2);
                         let differenceDisplay = difference > 0 ? `+${difference}` : difference;
 
