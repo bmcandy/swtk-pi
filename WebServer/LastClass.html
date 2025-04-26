@@ -42,20 +42,25 @@
                 ldb = ""
                 document.getElementById('ldb').innerHTML = ""
                 for (i = 0; i <= t; i++) {
-                    
-
-                    console.log("i",i); 
-                    ldb += '<div class="driverContainer"><div class="driverLeft"><div class="driverPosition">' + (i+1) + '</div><!--<span class="line best"></span>--><div class="driverName">' + content[i].Driver + '</div></div>'
+                    console.log("i", i); 
+                    ldb += '<div class="driverContainer"><div class="driverLeft"><div class="driverPosition">' + (i+1) + '</div><!--<span class="line best"></span>--><div class="driverName">' + content[i].Driver + '</div></div>';
 
                     if (content[i].Best === null) {
-                        ldb += '<div class="driverRight"><div class="driverInterval"></div></div></div>';
-                
+                        // Skip time difference for the top row (i === 0)
+                        ldb += '<div class="driverRight"><div class="driverInterval"></div><div class="driverDifference"></div></div></div>';
+                    } else if (i == 0) {
+                        ldb += '<div class="driverRight"><div class="driverInterval">' + parseFloat(content[i].Best.match(/^-?\d+(?:\.\d{0,2})?/)[0]) + '</div><div class="driverDifference"></div></div></div>';
                     } else {
-                        ldb += '<div class="driverRight"><div class="driverInterval">' + content[i].Best.match(/^-?\d+(?:\.\d{0,2})?/)[0]  + '</div></div></div>';
+                        let bestValue = parseFloat(content[i].Best.match(/^-?\d+(?:\.\d{0,2})?/)[0]);
+                        let topBestValue = parseFloat(content[0].Best.match(/^-?\d+(?:\.\d{0,2})?/)[0]);
+                        let difference = (bestValue - topBestValue).toFixed(2);
+                        let differenceDisplay = difference > 0 ? `+${difference}` : difference;
+
+                        ldb += '<div class="driverRight"><div class="driverInterval">' + bestValue + '</div><div class="driverDifference">' + differenceDisplay + '</div></div></div>';
                     }
 
                     document.getElementById('ldb').innerHTML += ldb;
-                    ldb =""; 
+                    ldb = ""; 
                 }    
             }
         </script>

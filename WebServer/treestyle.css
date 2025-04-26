@@ -63,6 +63,7 @@ body {
 .driverLeft {
   display: flex;
   background: black;
+  border-radius: 4px 0px 0px 4px;
 }
 .line {
   width: 4px;
@@ -94,10 +95,29 @@ body {
   text-align: left;
 }
 .driverRight {
-  width: 60px;
+  width: 140px;
   background: rgba(0, 0, 0, 0.8);
   font-size: 20px;
   padding: 3px;
-  text-align: right;
   color: #00c2cb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0px 4px 4px 0px;
+}
+
+.driverInterval {
+  width: 60px;
+  flex: 1;
+  text-align: right;
+}
+
+.driverDifference {
+  width: 80px;
+  color: #000000;
+  flex: 1;
+  text-align: right;
+  margin-left: 5px;
+  background: #00c2cb;
+  border-radius: 3px;
 }
