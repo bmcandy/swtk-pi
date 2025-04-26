@@ -78,6 +78,8 @@ def update_results(carno="", ftime="", rs=""):
         classfastest = ["Nobody", 999.999]
 
     # Get results so far
+    while cur.nextset():
+        pass
     cur.execute("SELECT * FROM ClassResults WHERE Car=%s", (carno,))
     if cur.rowcount:
         results = cur.fetchone()
@@ -95,6 +97,8 @@ def update_results(carno="", ftime="", rs=""):
                     conn.commit()
                 break
     else:
+        while cur.nextset():
+            pass
         cur.execute(
             "INSERT INTO ClassResults(Car, Practice1, Class) VALUES(%s, %s, %s)",
             (carno, ftime, vclass),
