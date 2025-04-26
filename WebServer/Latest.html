@@ -13,6 +13,23 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Latest Cars</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Add sliding animation */
+        .slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
     </head>
 <body>
 <div class = "outer">
@@ -20,27 +37,32 @@
 <div ID="ldb"></div>
 </div>  
 <script>
-url = "getlatest.php"
+url = "getlatest.php";
+let previousCars = []; // Store the last three car identifiers
+
 fetchlatest();
-setInterval(fetchlatest,1000);// Interval checking for new data
-function fetchlatest(){
+setInterval(fetchlatest, 1000); // Interval checking for new data
+
+function fetchlatest() {
     fetch(url)
-    .then(response => response.json())
-    .then(data => {
-        console.log("data",data)
-        console.log("data",data.length)
-        build(data)
-    })
-    .catch(error => {
-        console.log(error);
-        fetchlatest();
-    });    
+        .then(response => response.json())
+        .then(data => {
+            console.log("data", data);
+            console.log("data", data.length);
+            build(data);
+        })
+        .catch(error => {
+            console.log(error);
+            fetchlatest();
+        });
 }
-function build(content) {//build
+
+function build(content) { //build
     if (content.length == 0) return;
-    //Header
-    document.getElementById('hdr').innerHTML = ""
-    hdr =""; 
+
+    // Header
+    document.getElementById('hdr').innerHTML = "";
+    hdr = ""; 
     hdr += '<div class="cntr"><div class="txtr">'
     hdr += '<div class="txtc txtcc">' + "#"  + '</div>';
     hdr += '<div class="txtc txtcd">' + "Driver" + '</div>';
@@ -52,25 +74,44 @@ function build(content) {//build
     hdr += '</div></div>'
     document.getElementById('hdr').innerHTML = hdr;
     hdr =""; 
-    //Leaderboard
-    t= content.length -1;
-    ldb = ""
-    document.getElementById('ldb').innerHTML = ""
-    for (i = 0; i <= t; i++) {
-        ldb += '<div class="cntr"style="background-color :#'+ content[i].Colour+'"><div class="txtr">'
-        ldb += '<div class="txtc txtcc">' + content[i].Car  + '</div>';
-        ldb += '<div class="txtc txtcd">' + content[i].Driver  + '</div>';
-        ldb += '<div class="txtc txtcm">' + content[i].MakeModel  + '</div>';
-        ldb += '<div class="txtc txtcl">' + content[i].Class  + '</div>';
-        ldb += '<div class="txtc txtc6">' + parseFloat(content[i].SixtyFour).toFixed(2)  + '</div>';
-        ldb += '<div class="txtc txtcs">' + parseFloat(content[i].Split).toFixed(2)  + '</div>';
-        ldb += '<div class="txtc txtcf">' + parseFloat(content[i].Finish).toFixed(2)  + '</div>';
-        ldb += '</div></div>'
-        document.getElementById('ldb').innerHTML += ldb;
-        ldb =""; 
+
+    // Leaderboard
+    let newCars = [];
+    let ldbElement = document.getElementById('ldb');
+
+    // Check for new rows
+    for (let i = 0; i < content.length; i++) {
+        if (!previousCars.includes(content[i].Car)) {
+            newCars.push(content[i]);
+        }
     }
 
-}//build
+    // If there are new rows, update the leaderboard
+    if (newCars.length > 0) {
+        // Slide in the new row at the top
+        let newRow = '<div class="cntr slide-in" style="background-color:#' + newCars[0].Colour + '"><div class="txtr">';
+        newRow += '<div class="txtc txtcc">' + newCars[0].Car + '</div>';
+        newRow += '<div class="txtc txtcd">' + newCars[0].Driver + '</div>';
+        newRow += '<div class="txtc txtcm">' + newCars[0].MakeModel + '</div>';
+        newRow += '<div class="txtc txtcl">' + newCars[0].Class + '</div>';
+        newRow += '<div class="txtc txtc6">' + parseFloat(newCars[0].SixtyFour).toFixed(2) + '</div>';
+        newRow += '<div class="txtc txtcs">' + parseFloat(newCars[0].Split).toFixed(2) + '</div>';
+        newRow += '<div class="txtc txtcf">' + parseFloat(newCars[0].Finish).toFixed(2) + '</div>';
+        newRow += '</div></div>';
+
+        // Add the new row at the top
+        ldbElement.insertAdjacentHTML('afterbegin', newRow);
+
+        // Update the previousCars array
+        previousCars.unshift(newCars[0].Car);
+
+        // Remove rows exceeding the limit of three
+        while (previousCars.length > 3) {
+            previousCars.pop();
+            ldbElement.removeChild(ldbElement.lastElementChild);
+        }
+    }
+}
 </script> 
 </body>
 </html>
