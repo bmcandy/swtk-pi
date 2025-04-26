@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!--
+- (c) Franky Vanroy 2022
+- Script created for Andy Laurence
+- Fetching the data of the RawResults
+- and populating a graphic
+- Displays the top 15 times, with the lowest 3 rows greyed out
+-->
+<html>
+    <head>
+    <html style ="width: 1920px; overflow :hidden">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Top 15 Qualifiers</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+<div class="outer2">
+<div ID="hdr"></div>
+<div ID="ldb"></div>
+</div>  
+<script>
+url = "gettop12qualifiers.php" + window.location.search;
+fetchRawResults();
+setInterval(fetchRawResults, 1000); // Interval checking for new data
+
+function fetchRawResults() {
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        build(data);
+    })
+    .catch(error => {
+        console.log(error);
+        fetchRawResults();
+    });    
+}
+
+function build(content) {
+    if (content.length == 0) return;
+
+    // Header
+    document.getElementById('hdr').innerHTML = "";
+    let hdr = ""; 
+    hdr += '<div class="cntr2"><div class="txtr">';
+    hdr += '<div class="txtc txtch2">Top 15 Qualifiers</div>';
+    hdr += '</div></div>';
+    document.getElementById('hdr').innerHTML = hdr;
+
+    // Leaderboard
+    let ldb = "";
+    document.getElementById('ldb').innerHTML = "";
+
+    // Sort by Best time and take the top 15
+    let sortedContent = content
+        .filter(item => item.Finish !== null)
+        .sort((a, b) => a.Finish - b.Finish)
+        .slice(0, 15);
+
+    let minFinish = Math.min(...sortedContent.map(item => item.Finish));
+
+    for (let i = 0; i < sortedContent.length; i++) {
+        let rowClass = i >= 12 ? "greyed-out" : ""; // Grey out the last 3 rows
+        ldb += `<div class="cntr2 ${rowClass}"><div class="txtr">`;
+        ldb += `<div class="txtc txtcr2">${i + 1}</div>`;
+        ldb += `<div class="txtc txtcd2">${sortedContent[i].Driver}</div>`;
+        ldb += `<div class="txtc txtcf2">${parseFloat(sortedContent[i].Finish).toFixed(2)}</div>`;
+        ldb += `<div class="txtc txtcf2">+${(parseFloat(sortedContent[i].Finish - minFinish).toFixed(2))}</div>`;
+        ldb += '</div></div>';
+    }
+
+    document.getElementById('ldb').innerHTML = ldb;
+}
+</script>
+<style>
+/* Add styles for greyed-out rows */
+.greyed-out {
+    background-color: #d3d3d3;
+    color: #808080;
+}
+</style>
+</body>
+</html>
