@@ -67,12 +67,19 @@
                 if (content[i]) {
 
                     tableRows += '<tr class="top12-row"><td class="top12-position">' + (i + 1) + '</td>'
-                        + '<td class="top12-driver">' + content[i].Driver + '</td>';
+                        + '<td class="top12-driver">' + content[i].Driver + '</td><td></td>';
 
-                    if (content[i].Finish !== null) {
-                        tableRows += '<td class="top12-time">' + parseFloat(content[i].Finish).toFixed(2) + '</td></tr>'
+                    if (i == 0) {
+                        tableRows += '<td class="top12-time">' + parseFloat(content[i].Finish).toFixed(2) + '</td><td></td></tr>'
+                    } else if (content[i].Finish !== null) {
+                        let bestValue = parseFloat(content[i].Finish.match(/^-?\d+(?:\.\d{0,2})?/)[0]);
+                        let topBestValue = parseFloat(content[0].Finish.match(/^-?\d+(?:\.\d{0,2})?/)[0]);
+                        let difference = (bestValue - topBestValue).toFixed(2);
+                        let differenceDisplay = difference > 0 ? `+${difference}` : difference;
+
+                        tableRows += '<td class="top12-time">' + parseFloat(content[i].Finish).toFixed(2) + '</td><td>' + differenceDisplay + '</td></tr>'
                     } else {
-                        tableRows += '<td class="top12-time">-</td></tr>'
+                        tableRows += '<td class="top12-time">-</td><td></td></tr>'
 
                     }
                 }
