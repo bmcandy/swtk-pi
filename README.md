@@ -3,9 +3,21 @@ Scripts to receive timing data from SW Timekeeping
 
 Data is received over RS232 using a MAX232 converter at 1200 baud.  The data is parsed and inserted into a MariaDB database on the Pi.  A flask app returns this data over a web interface.
 
-## Pre-requisites
+## Pre-requisites (v2)
 - MariaDB installed on the Pi
 - Python (obvs, but running v2 because Pi & dependencies)
+
+## Pre-requisites (v3)
+- Raspberry Pi (tested on Pi4)
+- Raspbian OS (latest as of 26/04/2025)
+
+## v3 Installation
+- git clone https://github.com/bmcandy/swtk-pi.git
+- cd swtk-pi
+- cp .env-example .env
+- edit the values of .env to match your setup, although it'll work out of the box as it's all internal (insecure) passwords
+- ./install.sh
+- ./run.sh
 
 ## Requirements
 - **Database**: MariaDB with the following tables:
