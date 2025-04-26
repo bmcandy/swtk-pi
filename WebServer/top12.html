@@ -70,7 +70,7 @@
                         + '<td class="top12-driver">' + content[i].Driver + '</td>';
 
                     if (content[i].Finish !== null) {
-                        tableRows += '<td class="top12-time">' + content[i].Finish + '</td></tr>'
+                        tableRows += '<td class="top12-time">' + parseFloat(content[i].Finish).toFixed(2) + '</td></tr>'
                     } else {
                         tableRows += '<td class="top12-time">-</td></tr>'
 

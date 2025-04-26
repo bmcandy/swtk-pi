@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>WebServer Index</title>
+    <title>Timing Screens Index</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,10 +26,13 @@
         a:hover {
             text-decoration: underline;
         }
+        .greyed {
+            background-color: #f4f4f4;
+        }
     </style>
 </head>
 <body>
-    <h1>WebServer Index</h1>
+    <h1>Timing Screens Index</h1>
     <table>
         <thead>
             <tr>
@@ -40,15 +43,15 @@
         <tbody>
             <tr>
                 <td><a href="top12.html">top12.html</a></td>
-                <td>Displays the top 12 drivers and their finish times.</td>
+                <td>Displays the top 12 drivers and their finish times in RawResults table.</td>
             </tr>
             <tr>
                 <td><a href="Ranked.html">Ranked.html</a></td>
-                <td>Shows ranked results per class with the best times and intervals.</td>
+                <td>Shows ranked results per class with the best times and intervals.  Use ?class=<classname> to select the class to display.</classname></td>
             </tr>
             <tr>
                 <td><a href="RankedPersistent.html">RankedPersistent.html</a></td>
-                <td>Displays persistent ranked results per class with the best times and intervals.</td>
+                <td>Displays persistent ranked results per class with the best times and intervals.  Uses the class that was last selected with classes.html.</td>
             </tr>
             <tr>
                 <td><a href="Latest.html">Latest.html</a></td>
@@ -59,24 +62,24 @@
                 <td>Shows the leaderboard for the last class that ran.</td>
             </tr>
             <tr>
+                <td><a href="classes.html">classes.html</a></td>
+                <td>Displays a list of available classes and their ranked results on selection.  Used for selecting which class is shown on RankedPersistent.html and useful for remote selection of graphics on the live timing screen.</td>
+            </tr>
+            <tr class="greyed">
                 <td><a href="top12.php">top12.php</a></td>
                 <td>Fetches the top 12 results from the database in JSON format.</td>
             </tr>
-            <tr>
+            <tr class="greyed">
                 <td><a href="getranked.php">getranked.php</a></td>
                 <td>Fetches ranked results for a specific class from the database.</td>
             </tr>
-            <tr>
+            <tr class="greyed">
                 <td><a href="getlatest.php">getlatest.php</a></td>
                 <td>Fetches the latest runs from the database in JSON format.</td>
             </tr>
-            <tr>
+            <tr class="greyed">
                 <td><a href="getlastclass.php">getlastclass.php</a></td>
                 <td>Fetches the leaderboard for the last class that ran from the database.</td>
-            </tr>
-            <tr>
-                <td><a href="classes.html">classes.html</a></td>
-                <td>Displays a list of available classes and their ranked results on selection.  Used for selecting which class is shown on RankedPersistent.html and useful for remote selection of graphics on the live timing screen.</td>
             </tr>
         </tbody>
     </table>
