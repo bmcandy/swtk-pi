@@ -19,6 +19,11 @@ ser = serial.Serial(
     timeout=1
 )
 
+if os.getenv("DEBUG") == "True":
+    debug = True
+else:
+    debug = False
+
 # Connect to MySQL
 def connect_to_database():
     try:
@@ -51,7 +56,7 @@ def speak_finish_time(car, driver, time, split, sixtyfour=None):
     if sixtyfour:
         message += f" and a sixty four foot time of {sixtyfour} seconds"
 
-    print(message)
+    print(message) if debug else None
 
 # Update results table
 def update_results(carno="", ftime="", rs=""):
@@ -73,7 +78,7 @@ def update_results(carno="", ftime="", rs=""):
         )
         classfastest = cur.fetchone() if cur.rowcount else ["Nobody", 999.999]
     else:
-        print("unknown class")
+        print("Unknown class: %s,%s,%s" % (carno, ftime, rs))
         vclass = "Unknown"
         classfastest = ["Nobody", 999.999]
 
@@ -112,21 +117,21 @@ def record_finish(result):
     x = result.split("\r")[1]
     sixtyfour = x.split("   ")[1].split(" ")[0]
     splittime = x.split("  ")[2].split("\r")[0]
-    print(f"Car: {carnumber}, Time: {finishtime}, 64ft: {sixtyfour}, Split: {splittime}")
+    print(f"Car: {carnumber}, Time: {finishtime}, 64ft: {sixtyfour}, Split: {splittime}") if debug else None
 
     if finishtime in ["NTR", "Red Flag"]:
         finishtime = "999.999"
         runstate = "RERUN"
     elif finishtime == "FAIL":
         runstate = "FAIL"
-        print("updating results (%s, %s, %s)" % (carnumber, finishtime, runstate))
+        print("updating results (%s, %s, %s)" % (carnumber, finishtime, runstate)) if debug else None
         update_results(carnumber, finishtime, runstate)
     else:
         runstate = "Normal"
-        print("updating results (%s, %s, %s)" % (carnumber, finishtime, runstate))
+        print("updating results (%s, %s, %s)" % (carnumber, finishtime, runstate)) if debug else None
         update_results(carnumber, finishtime, runstate)
 
-    print("Inserting into RawResults (%s, %s, %s, %s, %s)" % (carnumber, sixtyfour, splittime, finishtime, runstate))
+    print("Inserting into RawResults (%s, %s, %s, %s, %s)" % (carnumber, sixtyfour, splittime, finishtime, runstate)) if debug else None
     # Insert into RawResults
     cur.execute(
         "INSERT INTO RawResults(Car, SixtyFour, Split, Finish, RunState) VALUES(%s, %s, %s, %s, %s)",
@@ -140,6 +145,6 @@ def record_finish(result):
 while True:
     x = ser.readline().decode("utf-8")
     if "Car:" in x:
-        print(f"Received: {x}")
+        print(f"Received: {x}") if debug else None
         record_finish(x)
 
