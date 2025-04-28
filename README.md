@@ -12,6 +12,12 @@ Data is received over RS232 using a MAX232 converter at 1200 baud.  The data is 
 - Raspbian OS (latest as of 26/04/2025)
 
 ## v3 Installation
+- enable the serial port and disable the serial console in raspi-config
+  - sudo raspi-config
+  - 3 Interface Options
+  - I6 Serial port
+  - Disable login shell
+  - Enable serial port
 - git clone https://github.com/bmcandy/swtk-pi.git
 - cd swtk-pi
 - cp .env-example .env
